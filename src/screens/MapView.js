@@ -20,8 +20,6 @@ import * as Location from "expo-location";
 import { MaterialIcons } from "@expo/vector-icons";
 import CovidData from "../components/CovidData.js";
 
-import firebase from "../database/firebaseDB"
-
 const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = 220;
 const CARD_WIDTH = width * 0.8;
@@ -148,8 +146,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 5, 
     padding: 18, 
-    shadowColor: '#ccc',
-    shadowOffset: {width: 0, height: 3},
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.5, 
     shadowRadius: 5, 
     elevation: 10, 

@@ -20,7 +20,7 @@ export default class App extends React.Component {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home Page" screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Home Page" component={HomePageUser}/>
+          <Stack.Screen name="Home Page" component={HomePage}/>
         </Stack.Navigator>
       </NavigationContainer>
     );
