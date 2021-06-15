@@ -27,7 +27,7 @@ const CARD_HEIGHT = 220;
 const CARD_WIDTH = width * 0.8;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
-export default class HomePageCustomer extends Component {
+export default class HomePage extends Component {
   constructor(props) {
     super(props);
 

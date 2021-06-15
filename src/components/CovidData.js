@@ -8,7 +8,6 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { ProgressBar, Colors } from "react-native-paper";
-import firebase from "../database/firebaseDB"
 
 export default class CovidData extends Component {
   constructor(props) {
@@ -35,16 +34,7 @@ export default class CovidData extends Component {
         'vax_first_dose': '2,503,814',
         'vaxx_percentage': 42.46137576258936}
       };
-    this.snapshot();
   }
-
-  snapshot = () => {
-    let unsubscribe = firebase.firestore().collection("categories").onSnapshot((pull) => {
-        const updatedNotes = pull.docs.map((doc)=> doc.data());
-        this.setState({categories: updatedNotes})
-      })
-  }
-
 
   render() {
     return (

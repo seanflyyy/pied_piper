@@ -7,7 +7,7 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import HomePageUser from "./src/screens/MapView";
+import HomePage from "./src/screens/MapView";
 
 const Stack = createStackNavigator();
 
