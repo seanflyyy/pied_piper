@@ -6,9 +6,8 @@ import { StyleSheet } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-
 import HomePage from "./src/screens/MapView";
-
+import BottomSheet from "./src/components/BottomSheet";
 const Stack = createStackNavigator();
 
 export default class App extends React.Component {

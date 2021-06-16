@@ -1,0 +1,163 @@
+[
+    {
+        "location": "Gardens By The Bay",
+        "coordinate": {
+            "latitude": 1.2815683,
+            "longitude": 103.8636132
+        },
+        "price": "8.00",
+        "bookingLink": "https://ticket.gardensbythebay.com.sg/product/listing",
+        "type": "nature"
+    },
+    {
+        "location": "Singapore Zoo",
+        "coordinate": {
+            "latitude": 1.4043485,
+            "longitude": 103.793023
+        },
+        "price": "32.80",
+        "bookingLink": "https://www.wrs.com.sg/en/ticketing/admission-and-rides/parks-selection.html",
+        "type": "animal"
+
+    },
+    {
+        "location": "National Gallery Singapore",
+        "coordinate": {
+            "latitude": 1.2902217,
+            "longitude": 103.8515167
+        },
+        "price": "12.00",
+        "bookingLink": "https://tickets.nationalgallery.sg/",
+        "type": "museum"
+    },
+    {
+        "location": "The Original Singapore Walks",
+        "coordinate": {
+            "latitude": 1.285506,
+            "longitude": 103.783144
+        },
+        "price": "40.00",
+        "bookingLink": "https://www.journeys.com.sg/tosw/the-ticket-shop/of-graves-guns-and-battles",
+        "type": "nature"
+    },
+    {
+        "location": "ArtScience Museum",
+        "coordinate": {
+            "latitude": 1.2862738,
+            "longitude": 103.8592663
+        },
+        "price": "16.00",
+        "bookingLink": "https://www.marinabaysands.com/museum/ticket.html",
+        "type": "museum"
+    },
+    {
+        "location": "Battlebox",
+        "coordinate": {
+            "latitude": 1.2961611,
+            "longitude": 103.8461761
+        },
+        "price": "20.00",
+        "bookingLink": "https://www.battlebox.com.sg/ticketing.html",
+        "type": "war"
+    },
+    {
+        "location": "Changi Experience Studio",
+        "coordinate": {
+            "latitude": 1.3598544,
+            "longitude": 103.9892339
+        },
+        "price": "19.00",
+        "bookingLink": "https://www.jewelchangiairport.com/en/ticketing.html",
+        "type": "airport"
+    },
+    {
+        "location": "Wild Wild Wet",
+        "coordinate": {
+            "latitude": 1.3774226,
+            "longitude": 103.9547787
+        },
+        "price": "24.00",
+        "bookingLink": "https://www.wildwildwet.com/",
+        "type": "attractions"
+    },
+    {
+        "location": "River Safari",
+        "coordinate": {
+            "latitude": 1.403186,
+            "longitude": 103.7906876
+        },
+        "price": "30.40",
+        "bookingLink": "https://www.wrs.com.sg/en/ticketing/admission-and-rides/parks-selection.html",
+        "type": "attractions"
+    },
+    {
+        "location": "Jewel Changi Airport Canopy Park Attractions",
+        "coordinate": {
+            "latitude": 1.360261,
+            "longitude": 103.9892345
+        },
+        "price": "4.50",
+        "bookingLink": "https://www.jewelchangiairport.com/en/ticketing.html",
+        "type": "airport"
+    },
+    {
+        "location": "Science Centre Singapore",
+        "coordinate": {
+            "latitude": 1.3331687,
+            "longitude": 103.7356443
+        },
+        "price": "2.00",
+        "bookingLink": "https://www.science.edu.sg/buy-tickets",
+        "type": "science"
+    },
+    {
+        "location": "Jurong Bird Park ",
+        "coordinate": {
+            "latitude": 1.3187065,
+            "longitude": 103.7064417
+        },
+        "price": "27.20",
+        "bookingLink": "https://www.wrs.com.sg/en/ticketing/admission-and-rides/parks-selection.html",
+        "type": "animal"
+    },
+    {
+        "location": "Mega Adventure",
+        "coordinate": {
+            "latitude": 1.2559413,
+            "longitude": 103.8122967
+        },
+        "price": "20.00",
+        "bookingLink": "https://www.sg.megaadventure.com/sg-rediscover",
+        "type": "nature"
+    },
+    {
+        "location": "Night Safari",
+        "coordinate": {
+            "latitude": 1.4021872,
+            "longitude": 103.7880606
+        },
+        "price": "37.10",
+        "bookingLink": "https://www.wrs.com.sg/en/ticketing/admission-and-rides/parks-selection.html",
+        "type": "animal"
+    },
+    {
+        "location": "Singapore Flyer",
+        "coordinate": {
+            "latitude": 1.2892988,
+            "longitude": 103.8631368
+        },
+        "price": "10.00",
+        "bookingLink": "https://www.singaporeflyer.com/en/srv",
+        "type": "attractions"
+    },
+    {
+        "location": "AJ Hackett Sentosa",
+        "coordinate": {
+            "latitude": 1.2551579,
+            "longitude": 103.8133231
+        },
+        "price": "15.00",
+        "bookingLink": "https://www.skyparkglobal.com/sg-en/sentosa",
+        "type": "attractions",
+    }
+]

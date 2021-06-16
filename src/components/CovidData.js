@@ -19,8 +19,8 @@ export default class CovidData extends Component {
     this.state = {
       section: {
         cases_section: {
-          active_cases: 373,
           cases_date_updated: "14 June 2021",
+          active_cases: 373,
           deaths: 34,
           discharged: 61894,
           hospitalised_critical: 2,
@@ -28,9 +28,9 @@ export default class CovidData extends Component {
           in_community_facilities: 235,
         },
         imported_cases_section: {
+          imported_cases_date_updated: "14 June 2021",
           imported_cases: 4728,
           imported_cases_change: "+6",
-          imported_cases_date_updated: "14 June 2021",
         },
         swab_section: {
           avg_daily_swab: 59900,
@@ -74,9 +74,29 @@ export default class CovidData extends Component {
       dataToDisplay: [],
       key: 0,
       dataVisible: false,
+      selectedButton: '',
     };
+    this.fadeAnim = new Animated.Value(0)
   }
 
+   fadeIn = () => {
+    // Will change fadeAnim value to 1 in 5 seconds
+    Animated.timing(this.fadeAnim, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+  };
+
+   fadeOut = () => {
+    // Will change fadeAnim value to 0 in 3 seconds
+    Animated.timing(this.fadeAnim, {
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+  };
+  
   displayExtraData = (index, visible) => {
     const chip = this.state.categories[index];
     const values = Object.values(chip);
@@ -104,11 +124,12 @@ export default class CovidData extends Component {
   render() {
     let lst = this.state.categories;
     lst = lst.slice(0, 3);
-    console.log(this.state.dataToDisplay);
 
     return (
       <View>
-        <TouchableOpacity style={styles.vaccinatedBar}>
+        <View style={styles.vaccinatedBar}
+        // onPress={() => this.setState({ selectedButton: 'button1' })}
+        >
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
@@ -122,11 +143,17 @@ export default class CovidData extends Component {
             progress={this.state.section.vax_section.vaxx_percentage / 100}
             color={Colors.red800}
           />
-        </TouchableOpacity>
+        </View>
+
         <View style={styles.container}>
           <TouchableOpacity
-            style={styles.chipsItem}
-            onPress={() => this.displayExtraData(0, true)}
+            style={[styles.chipsItem, {borderColor: this.state.selectedButton==='button2' ? '#26b99d' : 'white'}]}
+            onPress={() => {
+              this.displayExtraData(0, true)
+              this.fadeIn()
+              this.setState({ selectedButton: 'button2' })
+            }
+          }
           >
             <Text style={styles.boxName}>Active Cases: </Text>
             <Text style={styles.boxElement}>
@@ -134,17 +161,26 @@ export default class CovidData extends Component {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.chipsItem}
-            onPress={() => this.displayExtraData(1, true)}
-          >
+            style={[styles.chipsItem, {borderColor: this.state.selectedButton==='button3' ? '#26b99d' : 'white'}]}
+            onPress={() => {
+              this.displayExtraData(1, true)
+              this.fadeIn()
+              this.setState({ selectedButton: 'button3' })
+            }
+          }          >
             <Text style={styles.boxName}>Imported Cases: </Text>
             <Text style={styles.boxElement}>
               {this.state.section.imported_cases_section.imported_cases_change}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.chipsItem}
-            onPress={() => this.displayExtraData(2, true)}
+            style={[styles.chipsItem, {borderColor: this.state.selectedButton==='button4' ? '#26b99d' : 'white'}]}
+            onPress={() => {
+              this.displayExtraData(2, true)
+              this.fadeIn()
+              this.setState({ selectedButton: 'button4' })
+            }
+          }
           >
             <Text style={styles.boxName}>Swabbed: </Text>
             <Text style={styles.boxElement}>
@@ -152,34 +188,7 @@ export default class CovidData extends Component {
             </Text>
           </TouchableOpacity>
         </View>
-        {/*
-           <View style={styles.centeredView}>
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={this.state.modalVisible}
-              onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
-                this.displayExtraData(!this.state.modalVisible);
-              }}
-            >
-              <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                  <Text style={styles.modalText}>Hi!</Text>
-                  <TouchableOpacity
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={() =>
-                      this.displayExtraData(!this.state.modalVisible)
-                    }
-                  >
-                    <Text style={styles.textStyle}>Hide Modal</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </Modal>
-          </View> */}
-        {this.state.dataVisible && (
-          <Animated.View>
+          <Animated.View style={{opacity: this.fadeAnim}}> 
             <View style={styles.centeredView}>
               <View
                 style={{
@@ -191,19 +200,21 @@ export default class CovidData extends Component {
                   {this.state.dataToDisplay.map((chips, index) => {
                     return (
                       <View style={styles.extraInfoContainer}>
-                        <Text style={{fontWeight: 'bold'}}>{this.capitalizeTheFirstLetterOfEachWord((chips[0]).replace(/_/g, ' '))} : </Text>
-                        <Text style={{ color: "red" }}>{chips[1]}</Text>
+                        <Text style={styles.boxName}>{this.capitalizeTheFirstLetterOfEachWord((chips[0]).replace(/_/g, ' '))} : </Text>
+                        <Text style={styles.boxElement}>{chips[1].toLocaleString()}</Text>
                       </View>
                     );
                   })}
                 </View>
-                <TouchableOpacity onPress={() => {this.displayExtraData(this.state.key,)}}>
+                <TouchableOpacity onPress={() => {
+                  this.displayExtraData(this.state.key,false)
+                  this.fadeOut()
+                  this.setState({selectedButton: ''})}}>
                   <EvilIcons name="close" size={24} color="black" />
                 </TouchableOpacity>
               </View>
             </View>
           </Animated.View>
-        )}
       </View>
     );
   }
@@ -225,6 +236,8 @@ const styles = StyleSheet.create({
     elevation: 10,
     flexDirection: "column",
     justifyContent: "space-between",
+    // borderColor: '#26b99d',
+    // borderWidth: 1,
   },
   extraInfoContainer: {
     flexDirection: "row",
@@ -291,14 +304,15 @@ const styles = StyleSheet.create({
   chipsItem: {
     flexDirection: "row",
     borderRadius: 5,
-    padding: 7,
-    backgroundColor: "#fff",
+    padding: 5,
     height: "auto",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.5,
-    shadowRadius: 5,
+    shadowRadius: 2,
     elevation: 10,
+    borderWidth: 1,
+    backgroundColor: 'white',
   },
   vaccinatedBar: {
     position: "relative",
