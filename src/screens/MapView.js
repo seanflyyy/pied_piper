@@ -114,14 +114,6 @@ export default class HomePage extends Component {
     this.setState({ region: region });
   };
 
-  getData = () => {
-  database()
-  .ref('/users/123')
-  .once('value')
-  .then(snapshot => {
-    console.log('User data: ', snapshot.val());
-  });}
-
   centerMap() {
     const { latitude, longitude, latitudeDelta, longitudeDelta } =
       this.state.region;
