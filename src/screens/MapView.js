@@ -25,6 +25,7 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
+import {db} from '../database/realTimeDatabase.js';
 import CovidData from "../components/CovidData.js";
 import { color } from "react-native-reanimated";
 // import CovidSheet from "../components/CovidSheetEvents.js"
@@ -75,6 +76,7 @@ export default class HomePage extends Component {
       eventMarker: eventsData,
       covidMarker: covidMarkerData,
       region: null,
+      allTheMarkers: [],
       covidCases: 300,
       selectedMarker: [],
       showEventSheet: false,
@@ -85,6 +87,17 @@ export default class HomePage extends Component {
     this.getLocationAsync();
   }
 
+  componentDidMount() {
+    db.ref('/todos').on('value', querySnapShot => {
+      let data = querySnapShot.val() ? querySnapShot.val() : {};
+
+      let todoItems = {...data};
+      console.log(data);
+      this.setState({
+        allTheMarkers: todoItems,
+      });
+    });
+  }
   // get the location on Press
   getLocationAsync = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -100,6 +113,14 @@ export default class HomePage extends Component {
     };
     this.setState({ region: region });
   };
+
+  getData = () => {
+  database()
+  .ref('/users/123')
+  .once('value')
+  .then(snapshot => {
+    console.log('User data: ', snapshot.val());
+  });}
 
   centerMap() {
     const { latitude, longitude, latitudeDelta, longitudeDelta } =
@@ -149,43 +170,43 @@ export default class HomePage extends Component {
           rotateEnable={false}
           showsUserLocation={true}
           showsPointsOfInterest={false}
-          provider={"google"}
-          customMapStyle={[
-            {
-              featureType: "administrative",
-              elementType: "geometry",
-              stylers: [
-              {
-                  visibility: "off"
-              }
-              ]
-            },
-            {
-              featureType: "poi",
-              stylers: [
-                {
-                  visibility: "off"
-                }
-              ]
-            },
-            {
-              featureType: "road",
-              elementType: "labels.icon",
-              stylers: [
-                {
-                  visibility: "off"
-                }
-              ]
-            },
-            {
-              featureType: "transit",
-              stylers: [
-                {
-                  visibility: "off"
-                }
-              ]
-            }
-          ]}
+          // provider={"google"}
+          // customMapStyle={[
+          //   {
+          //     featureType: "administrative",
+          //     elementType: "geometry",
+          //     stylers: [
+          //     {
+          //         visibility: "off"
+          //     }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "poi",
+          //     stylers: [
+          //       {
+          //         visibility: "off"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "road",
+          //     elementType: "labels.icon",
+          //     stylers: [
+          //       {
+          //         visibility: "off"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "transit",
+          //     stylers: [
+          //       {
+          //         visibility: "off"
+          //       }
+          //     ]
+          //   }
+          // ]}
           ref={(map) => (this.map = map)}
           followsUserLocation={true}
           initialRegion={this.state.region}
