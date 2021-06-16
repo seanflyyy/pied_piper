@@ -13,59 +13,71 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
-import {
-  withSpring,
-} from "react-native-reanimated";
+import { withSpring } from "react-native-reanimated";
 
 import MapView from "react-native-maps";
 import { CurrentLocationButton } from "../components/CurrentLocationButton.js";
 import * as Location from "expo-location";
-import { MaterialIcons, Ionicons, FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  MaterialIcons,
+  Ionicons,
+  FontAwesome5,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+
 import CovidData from "../components/CovidData.js";
 import { color } from "react-native-reanimated";
-import BottomSheet from "../components/BottomSheet.js";
+// import CovidSheet from "../components/CovidSheetEvents.js"
+import BottomSheet from "../components/BottomSheetEvents.js";
+const eventsData = require("../data/eventsNew.json");
+const covidMarkerData = require("../data/covid_locations.json");
 
-// import BottomSheetScreen from "@gorhom/bottom-sheet";
-
-// const events = require("../data/events.json")
-const customData = require("../data/eventsNew.json");
 const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = 220;
 const CARD_WIDTH = width * 0.8;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
-
 const colorOfEvent = {
-  "nature": "#26b99d",
-  "animal": "#26b99d",
-  "museum": "#89dbfb",
-  "war": "#f2ab23",
-  "airport" : "#89dbfb", 
-  "attractions": "#ffb0b2",
-  "science": "#924646",
-}
+  nature: "#26b99d",
+  animal: "#26b99d",
+  museum: "#89dbfb",
+  war: "#f2ab23",
+  airport: "#89dbfb",
+  attractions: "#ffb0b2",
+  science: "#924646",
+};
 const sizeOfIcons = 14;
 
 const typesOfEvents = {
-  "nature": <FontAwesome5 name="tree" size={sizeOfIcons} color="white" />,
-  "animal": <MaterialCommunityIcons name="elephant" size={sizeOfIcons} color="white" />,
-  "museum": <MaterialIcons name="museum" size={sizeOfIcons} color="white" />,
-  "war": <MaterialCommunityIcons name="bullet" size={sizeOfIcons} color="white"/>,
-  "airport" : <MaterialIcons name="local-airport" size={sizeOfIcons} color="white" />, 
-  "attractions": <MaterialIcons name="attractions" size={sizeOfIcons} color="white" />,
-  "science": <MaterialIcons name="science" size={sizeOfIcons} color="white" />,
-}
+  nature: <FontAwesome5 name="tree" size={sizeOfIcons} color="white" />,
+  animal: (
+    <MaterialCommunityIcons name="elephant" size={sizeOfIcons} color="white" />
+  ),
+  museum: <MaterialIcons name="museum" size={sizeOfIcons} color="white" />,
+  war: (
+    <MaterialCommunityIcons name="bullet" size={sizeOfIcons} color="white" />
+  ),
+  airport: (
+    <MaterialIcons name="local-airport" size={sizeOfIcons} color="white" />
+  ),
+  attractions: (
+    <MaterialIcons name="attractions" size={sizeOfIcons} color="white" />
+  ),
+  science: <MaterialIcons name="science" size={sizeOfIcons} color="white" />,
+};
 
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      markers: customData,
+      eventMarker: eventsData,
+      covidMarker: covidMarkerData,
       region: null,
       covidCases: 300,
       selectedMarker: [],
-      showSheet: false,
+      showEventSheet: false,
+      showCovidSheet: false, 
     };
     this.animation = new Animated.Value(0);
     this.getLocationAsync();
@@ -109,8 +121,20 @@ export default class HomePage extends Component {
     this.scroll.scrollTo({ x: x, y: 0, animated: false });
   };
 
-
   render() {
+    // const interpolations = this.state.eventMarker.map((marker, index) => {
+    //   const inputRange = [
+    //     (index - 1),
+    //     index ,
+    //     (index + 1),
+    //   ];
+    //   const scale = this.animation.interpolate({
+    //     inputRange,
+    //     outputRange: [1, 1.5, 1],
+    //     extrapolate: "clamp",
+    //   });
+    //   return scale;
+    // });
     return (
       <View style={styles.container}>
         {/* <BottomSheetScreen style={{position: 'absolute'}}/> */}
@@ -125,8 +149,12 @@ export default class HomePage extends Component {
           initialRegion={this.state.region}
           style={styles.container}
         >
-          {this.state.markers.map((marker, index) => {
-            console.log(marker)
+          {
+          
+          this.state.eventMarker.map((marker, index) => {
+            // const scaleStyle = {
+            //   transform: [{ scale: interpolations[index].scale }],
+            // };
             return (
               <MapView.Marker
                 key={index}
@@ -138,13 +166,42 @@ export default class HomePage extends Component {
                     latitudeDelta: 0.03864195044303443,
                     longitudeDelta: 0.030142817690068,
                   });
-                  this.setState({selectedMarker: marker, showSheet: true});
+                  this.setState({ selectedMarker: marker, showEventSheet: true, showCovidSheet: false});
                 }}>
-                <View style={[styles.ring, {backgroundColor: colorOfEvent[marker.type]}]}>
+                <Animated.View
+                  style={[
+                    styles.ring, 
+                    // scaleStyle,
+                    { backgroundColor: colorOfEvent[marker.type]}]}>
                   {typesOfEvents[marker.type]}
                   {/* <Text style={{fontSize: 8, fontWeight: 'bold', color: colorOfEvent[marker.type]}}>{marker.location}</Text> */}
+                </Animated.View>
+              </MapView.Marker>
+            );
+          })}
+          {this.state.covidMarker.map((marker, index) => {
+            return (
+              <MapView.Marker
+                key={index}
+                coordinate={marker.coordinate}
+                onPress={() => {
+                  this.map.animateToRegion({
+                    latitude: marker.coordinate.latitude,
+                    longitude: marker.coordinate.longitude,
+                    latitudeDelta: 0.03864195044303443,
+                    longitudeDelta: 0.030142817690068,
+                  });
+                  this.setState({ selectedMarker: marker, showCovidSheet: true, showEventSheet: false});
+                }}
+              >
+                <View
+                  style={[
+                    styles.ring,
+                    { backgroundColor: 'red' },
+                  ]}
+                >
+                  <MaterialIcons name="coronavirus" size={14} color="white" />
                 </View>
-
               </MapView.Marker>
             );
           })}
@@ -160,14 +217,20 @@ export default class HomePage extends Component {
             />
           </View>
           <CovidData />
-
-        </View >
+        </View>
         <CurrentLocationButton
-          cb={() => {this.centerMap(), this.setState({showSheet: false}) 
-          }}/>
-
-          <BottomSheet markerInfo={this.state.selectedMarker} showBottomSheet={this.state.showSheet}/>
-
+          cb={() => {
+            this.centerMap(), this.setState({ showCovidSheet: false, showCovidSheet: false });
+          }}
+        />
+        {/* <CovidSheet markerInfo={this.state.selectedMarker}
+          showCovidSheet={this.state.showCovidSheet}
+        /> */}
+        <BottomSheet
+          markerInfo={this.state.selectedMarker}
+          showBottomSheet={this.state.showEventSheet}
+          showCovidSheet={this.state.showCovidSheet}
+        />
       </View>
     );
   }
@@ -206,7 +269,7 @@ const styles = StyleSheet.create({
   markerWrap: {
     alignItems: "center",
     justifyContent: "center",
-    flexWrap:'wrap',
+    flexWrap: "wrap",
   },
   // marker: {
   //   width: 8,
@@ -217,23 +280,32 @@ const styles = StyleSheet.create({
   marker: {
     padding: 2,
     borderRadius: 20,
-    borderColor: 'white',
+    borderColor: "white",
     borderWidth: 2,
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    flexWrap: "wrap",
+    justifyContent: "center",
   },
   ring: {
     width: 24,
     height: 24,
     borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "white",
+  },
+  coronavirusRing: {
+    width: 18,
+    height: 18,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
     borderWidth: 2,
     borderColor: "white",
   },
   markerText: {
-    borderWidth: 2, 
-    borderColor: 'white'
+    borderWidth: 2,
+    borderColor: "white",
   },
   centeredView: {
     flex: 1,

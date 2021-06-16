@@ -1,0 +1,398 @@
+[
+  {
+    "count": 18,
+    "location": "ION Orchard (2 Orchard Turn)",
+    "coordinate": {
+      "latitude": 1.3039288,
+      "longitude": 103.8319512
+    },
+    "list_of_dates": [
+      ["1 to 7 Jun", "0600h to 1900h"],
+      ["1 Jun", "1230h to 2030h"],
+      ["3 Jun", "0845h to 1050h"],
+      ["3 Jun", "0900h to 1600h"],
+      ["3 to 4 Jun", "1230h to 2030h"],
+      ["4 Jun", "1300h to 2130h"],
+      ["5 Jun", "0900h to 2130h"],
+      ["5 Jun", "1230h to 2030h"],
+      ["6 Jun", "1230h to 2030h"],
+      ["6 Jun", "1240h to 1345h"],
+      ["6 Jun", "1300h to 2130h"],
+      ["7 Jun", "1220h to 1300h"],
+      ["7 Jun", "1230h to 2030h"],
+      ["8 Jun", "1325h to 1425h"],
+      ["9 to 10 Jun", "0600h to 1900h"],
+      ["9 Jun", "1230h to 2030h"],
+      ["11 Jun", "0600h to 0900h"],
+      ["11 Jun", "1030h to 1900h"]
+    ]
+  },
+  {
+    "count": 1,
+    "location": "Sheng Siong Supermarket (446A Fajar Road)",
+    "coordinate": {
+      "latitude": 1.3839523,
+      "longitude": 103.7709925
+    },
+    "list_of_dates": [["1 Jun", "0735h to 0810h"]]
+  },
+  {
+    "count": 1,
+    "location": "Beo Crescent Market (38A Beo Crescent)",
+    "coordinate": {
+      "latitude": 1.2887207,
+      "longitude": 103.8275188
+    },
+    "list_of_dates": [["1 Jun", "0900h to 0930h"]]
+  },
+  {
+    "count": 1,
+    "location": "JIC Inspection Services (53 Pioneer Road)",
+    "coordinate": {
+      "latitude": 1.311326,
+      "longitude": 103.657849
+    },
+    "list_of_dates": [["1 Jun", "1000h to 1230h"]]
+  },
+  {
+    "count": 1,
+    "location": "VICOM Inspection Centre (511 Bukit Batok Street 23)",
+    "coordinate": {
+      "latitude": 1.3414919,
+      "longitude": 103.755716
+    },
+    "list_of_dates": [["1 Jun", "1100h to 1230h"]]
+  },
+  {
+    "count": 1,
+    "location": "Hair Flare (201B Tampines Street 21)",
+    "coordinate": {
+      "latitude": 1.353532,
+      "longitude": 103.952869
+    },
+    "list_of_dates": [["1 Jun", "1620h to 1810h"]]
+  },
+  {
+    "count": 1,
+    "location": "Yew Tee Point (21 Choa Chu Kang North 6)",
+    "coordinate": {
+      "latitude": 1.39716,
+      "longitude": 103.7468352
+    },
+    "list_of_dates": [["1 Jun", "1725h to 1800h"]]
+  },
+  {
+    "count": 1,
+    "location": "Seletar Mall (33 Sengkang West Avenue)",
+    "coordinate": {
+      "latitude": 1.3915208,
+      "longitude": 103.8760834
+    },
+    "list_of_dates": [["1 Jun", "1955h to 2030h"]]
+  },
+  {
+    "count": 1,
+    "location": "HDB Hub (500 Toa Payoh Lorong 6)",
+    "coordinate": {
+      "latitude": 1.3323583,
+      "longitude": 103.8479611
+    },
+    "list_of_dates": [["1 Jun", "2100h to 2130h"]]
+  },
+  {
+    "count": 1,
+    "location": "The Poiz Centre (51 Upper Serangoon Road)",
+    "coordinate": {
+      "latitude": 1.3316079,
+      "longitude": 103.8683842
+    },
+    "list_of_dates": [["2 Jun", "0725h to 0930h"]]
+  },
+  {
+    "count": 1,
+    "location": "Novena Square 2 (10 Sinaran Drive)",
+    "coordinate": {
+      "latitude": 1.3208322,
+      "longitude": 103.8441474
+    },
+    "list_of_dates": [["2 Jun", "1320h to 1420h"]]
+  },
+  {
+    "count": 1,
+    "location": "Velocity@Novena Square (238 Thomson Road)",
+    "coordinate": {
+      "latitude": 1.3199572,
+      "longitude": 103.8439076
+    },
+    "list_of_dates": [["2 Jun", "1420h to 1520h"]]
+  },
+  {
+    "count": 1,
+    "location": "Sheng Shiong Supermarket (52 Chin Swee Road)",
+    "coordinate": {
+      "latitude": 1.286971,
+      "longitude": 103.8417616
+    },
+    "list_of_dates": [["2 Jun", "2115h to 2150h"]]
+  },
+  {
+    "count": 1,
+    "location": "Takashimaya (391A Orchard Road)",
+    "coordinate": {
+      "latitude": 1.3025944,
+      "longitude": 103.8353161
+    },
+    "list_of_dates": [["3 to 6 Jun", "0645h to 1700h"]]
+  },
+  {
+    "count": 1,
+    "location": "Scarlett Supermarket",
+    "coordinate": {
+      "latitude": 40.6551433,
+      "longitude": -74.19579379999999
+    },
+    "list_of_dates": [["3 Jun", "1645h to 1720h"]]
+  },
+  {
+    "count": 1,
+    "location": "Oasis Terraces (681 Punggol Drive)",
+    "coordinate": {
+      "latitude": 1.4023703,
+      "longitude": 103.9132022
+    },
+    "list_of_dates": [["3 Jun", "1845h to 1935h"]]
+  },
+  {
+    "count": 1,
+    "location": "Peninsula Plaza (111 North Bridge Road)",
+    "coordinate": {
+      "latitude": 1.2923407,
+      "longitude": 103.8508826
+    },
+    "list_of_dates": [["3 Jun", "1900h to 1950h"]]
+  },
+  {
+    "count": 1,
+    "location": "Mustafa Centre (145 Syed Alwi Road)",
+    "coordinate": {
+      "latitude": 1.309985,
+      "longitude": 103.8554636
+    },
+    "list_of_dates": [["3 Jun", "1955h to 2035h"]]
+  },
+  {
+    "count": 1,
+    "location": "Divine Beauty (303 Woodlands Street 31)",
+    "coordinate": {
+      "latitude": 1.4311171,
+      "longitude": 103.7740485
+    },
+    "list_of_dates": [["5 Jun", "1000h to 1045h"]]
+  },
+  {
+    "count": 15,
+    "location": "115 Bukit Merah View Market & Hawker Centre (115 Bukit Merah View)",
+    "coordinate": {
+      "latitude": 1.2854726,
+      "longitude": 103.822269
+    },
+    "list_of_dates": [
+      ["6 to 9 Jun", "0600h to 1400h"],
+      ["6 Jun", "0930h to 1430h"],
+      ["6 Jun", "1700h to 1945h"],
+      ["7 Jun", "0900h to 1000h"],
+      ["8 Jun", "0920h to 1500h"],
+      ["9 to 11 Jun", "0500h to 1800h"],
+      ["9 to 11 Jun", "0600h to 1500h"],
+      ["9 Jun", "0800h to 1500h"],
+      ["10 to 11 Jun", "0800h to 1400h"],
+      ["10 Jun", "0930h to 1430h"],
+      ["10 Jun", "1700h to 2100h"],
+      ["11 Jun", "0930h to 1430h"],
+      ["11 Jun", "1700h to 2100h"],
+      ["12 Jun", "0500h to 0530h"],
+      ["12 Jun", "0930h to 1430h"]
+    ]
+  },
+  {
+    "count": 1,
+    "location": "The Centrepoint (176 Orchard Road)",
+    "coordinate": {
+      "latitude": 1.3015383,
+      "longitude": 103.8401372
+    },
+    "list_of_dates": [["6 Jun", "1000h to 1100h"]]
+  },
+  {
+    "count": 1,
+    "location": "Orchard Central (181 Orchard Road)",
+    "coordinate": {
+      "latitude": 1.3006295,
+      "longitude": 103.8398742
+    },
+    "list_of_dates": [["6 Jun", "1100h to 1145h"]]
+  },
+  {
+    "count": 1,
+    "location": "Shona Thai Foot Massage (8 Telok Blangah Crescent)",
+    "coordinate": {
+      "latitude": 1.2777652,
+      "longitude": 103.819427
+    },
+    "list_of_dates": [["6 Jun", "1555h to 1700h"]]
+  },
+  {
+    "count": 1,
+    "location": "Queenstown Community Centre (365 Commonwealth Avenue)",
+    "coordinate": {
+      "latitude": 1.2988064,
+      "longitude": 103.8015642
+    },
+    "list_of_dates": [["6 Jun", "1955h to 2045h"]]
+  },
+  {
+    "count": 1,
+    "location": "Ngee Ann City (391A Orchard Road)",
+    "coordinate": {
+      "latitude": 1.3025572,
+      "longitude": 103.834568
+    },
+    "list_of_dates": [["7 Jun", "1300h to 1505h"]]
+  },
+  {
+    "count": 1,
+    "location": "Redhill Market (79 Redhill Lane)",
+    "coordinate": {
+      "latitude": 1.2878415,
+      "longitude": 103.8182751
+    },
+    "list_of_dates": [["8 to 10 Jun", "0730h to 0815h"]]
+  },
+  {
+    "count": 1,
+    "location": "Tiong Bahru Market and Food Centre (30 Seng Poh Road)",
+    "coordinate": {
+      "latitude": 1.2850573,
+      "longitude": 103.8328818
+    },
+    "list_of_dates": [["8 Jun", "0820h to 0900h"]]
+  },
+  {
+    "count": 1,
+    "location": "POSB Tiong Bahru Branch (302 Tiong Bahru Road)",
+    "coordinate": {
+      "latitude": 1.286331,
+      "longitude": 103.8269186
+    },
+    "list_of_dates": [["8 Jun", "1000h to 1200h"]]
+  },
+  {
+    "count": 1,
+    "location": "NTUC FairPrice (50 Havelock Road)",
+    "coordinate": {
+      "latitude": 1.2898284,
+      "longitude": 103.8267171
+    },
+    "list_of_dates": [["8 Jun", "1025h to 1100h"]]
+  },
+  {
+    "count": 1,
+    "location": "The One Hairstyling Studio (123 Lorong 1 Toa Payoh)",
+    "coordinate": {
+      "latitude": 1.3386474,
+      "longitude": 103.8456739
+    },
+    "list_of_dates": [["8 Jun", "1100h to 1345h"]]
+  },
+  {
+    "count": 1,
+    "location": "Excelsior Shopping Centre (5 Coleman Street)",
+    "coordinate": {
+      "latitude": 1.292045,
+      "longitude": 103.8497894
+    },
+    "list_of_dates": [["8 Jun", "1505h to 1555h"]]
+  },
+  {
+    "count": 1,
+    "location": "Ang Mo Kio MRT Station (2450 Ang Mo Kio Avenue 8)",
+    "coordinate": {
+      "latitude": 1.3699718,
+      "longitude": 103.8495876
+    },
+    "list_of_dates": [["8 Jun", "2015h to 2045h"]]
+  },
+  {
+    "count": 1,
+    "location": "Tiong Bahru Plaza (298 Tiong Bahru Road)",
+    "coordinate": {
+      "latitude": 1.2865081,
+      "longitude": 103.8277527
+    },
+    "list_of_dates": [["9 Jun", "1510h to 1550h"]]
+  },
+  {
+    "count": 3,
+    "location": "Telok Blangah Food Centre (79 Telok Blangah Drive)",
+    "coordinate": {
+      "latitude": 1.2734071,
+      "longitude": 103.8076301
+    },
+    "list_of_dates": [
+      ["10 Jun", "1000h to 1930h"],
+      ["11 Jun", "1000h to 1930h"],
+      ["12 Jun", "1000h to 1930h"]
+    ]
+  },
+  {
+    "count": 1,
+    "location": "Renee Hair Salon (756 Upper Serangoon Road)",
+    "coordinate": {
+      "latitude": 1.3535014,
+      "longitude": 103.8787863
+    },
+    "list_of_dates": [["10 Jun", "1205h to 1310h"]]
+  },
+  {
+    "count": 1,
+    "location": "NTUC FairPrice (166 Bukit Merah Central)",
+    "coordinate": {
+      "latitude": 1.28317,
+      "longitude": 103.8177388
+    },
+    "list_of_dates": [["11 Jun", "1230h to 1335h"]]
+  },
+  {
+    "count": 2,
+    "location": "The Clementi Mall (3155 Commonwealth Avenue West)",
+    "coordinate": {
+      "latitude": 1.314918,
+      "longitude": 103.7643089
+    },
+    "list_of_dates": [
+      ["11 Jun", "1610h to 1645h"],
+      ["13 Jun", "1315h to 1405h"]
+    ]
+  },
+  {
+    "count": 1,
+    "location": "Sheng Siong Supermarket (88 Tanglin Halt Road)",
+    "coordinate": {
+      "latitude": 1.3013906,
+      "longitude": 103.7985861
+    },
+    "list_of_dates": [["12 Jun", "1535h to 1610h"]]
+  },
+  {
+    "count": 2,
+    "location": "VivoCity",
+    "coordinate": {
+      "latitude": 1.2644032,
+      "longitude": 103.8222071
+    },
+    "list_of_dates": [
+      ["12 Jun", "1900h to 1940h"],
+      ["12 Jun", "1900h to 1945h"]
+    ]
+  }
+]

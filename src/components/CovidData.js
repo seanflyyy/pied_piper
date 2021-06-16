@@ -155,7 +155,7 @@ export default class CovidData extends Component {
             }
           }
           >
-            <Text style={styles.boxName}>Active Cases: </Text>
+            <Text style={styles.boxName}>Active: </Text>
             <Text style={styles.boxElement}>
               {this.state.section.cases_section.active_cases}
             </Text>
@@ -168,7 +168,7 @@ export default class CovidData extends Component {
               this.setState({ selectedButton: 'button3' })
             }
           }          >
-            <Text style={styles.boxName}>Imported Cases: </Text>
+            <Text style={styles.boxName}>Imported: </Text>
             <Text style={styles.boxElement}>
               {this.state.section.imported_cases_section.imported_cases_change}
             </Text>
@@ -199,7 +199,7 @@ export default class CovidData extends Component {
                 <View style={{ flexDirection: "column" }}>
                   {this.state.dataToDisplay.map((chips, index) => {
                     return (
-                      <View style={styles.extraInfoContainer}>
+                      <View style={styles.extraInfoContainer} key={index}>
                         <Text style={styles.boxName}>{this.capitalizeTheFirstLetterOfEachWord((chips[0]).replace(/_/g, ' '))} : </Text>
                         <Text style={styles.boxElement}>{chips[1].toLocaleString()}</Text>
                       </View>
@@ -242,6 +242,7 @@ const styles = StyleSheet.create({
   extraInfoContainer: {
     flexDirection: "row",
     elevation: 10,
+    marginTop: 4,
   },
   modalView: {
     backgroundColor: "white",
@@ -287,11 +288,11 @@ const styles = StyleSheet.create({
     marginTop: 9,
   },
   boxName: {
-    fontSize: 10,
+    fontSize: 13,
     fontWeight: "bold",
   },
   boxElement: {
-    fontSize: 10,
+    fontSize: 13,
     color: "red",
   },
   chipsScrollView: {
@@ -322,7 +323,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignSelf: "center",
     borderRadius: 5,
-    padding: 8,
+    padding: 11,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.5,

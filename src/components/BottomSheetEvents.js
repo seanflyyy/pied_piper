@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   Linking,
+  ScrollView,
 } from "react-native";
 import Animated, {
   useAnimatedGestureHandler,
@@ -28,7 +29,8 @@ const SPRING_CONFIG = {
 
 const BottomSheet = (props) => {
   useEffect(function () {
-    if (props.showBottomSheet) {
+    console.log(props.showBottomSheet, props.showCovidSheet)
+    if (props.showBottomSheet || props.showCovidSheet) {
       top.value = withSpring(dimensions.height / 2 + 30, SPRING_CONFIG);
     } else {
       top.value = withSpring(dimensions.height, SPRING_CONFIG);
@@ -38,7 +40,7 @@ const BottomSheet = (props) => {
   const markerInfo = props.markerInfo;
   const markerLink = String(markerInfo.bookingLink);
   const markerImage = markerInfo.locationImage
-  const urlReact = "https://reactnative.dev/img/tiny_logo.png";
+  const markerDates = props.showCovidSheet ? markerInfo.list_of_dates : [0, 0];
 
   const dimensions = useWindowDimensions();
 
@@ -83,6 +85,34 @@ const BottomSheet = (props) => {
       paddingVertical: 0,
       paddingHorizontal: 20,
     },
+    listData: {
+      fontSize: 15,
+      fontWeight: "bold",
+    },
+    datesSection: {
+      position: "relative",
+      marginHorizontal: 12,
+      marginVertical: 6,
+      backgroundColor: "#fff",
+      borderRadius: 5,
+      padding: 8,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.5,
+      shadowRadius: 3,
+      elevation: 10,
+      flexDirection: "row",
+      justifyContent: "flex-start",
+    },
+    datesSectionContainer: {
+      position: "relative",
+      // backgroundColor: "#000",
+      width: "100%",
+      borderRadius: 5,
+      height: dimensions.height / 5,
+      shadowColor: "#000",
+      flexDirection: "column",
+    },
   });
 
   const gestureHandler = useAnimatedGestureHandler({
@@ -109,9 +139,11 @@ const BottomSheet = (props) => {
 
   return (
     <>
-    {console.log(markerLink, typeof(String(markerLink)), 'https://reactjs.org/logo-og.png', typeof('https://reactjs.org/logo-og.png'))}
       <PanGestureHandler onGestureEvent={gestureHandler}>
         <Animated.View style={[styleSheetStyles.Animated, style]}>
+
+
+          {props.showBottomSheet && 
           <View>
             <AntDesign
               name="minus"
@@ -141,9 +173,53 @@ const BottomSheet = (props) => {
                 Book Event
               </Text>
             </TouchableOpacity>
+          </View>} 
+          
+          {props.showCovidSheet && 
+          <View>
+          <AntDesign
+            name="minus"
+            size={40}
+            color="black"
+            style={{ alignSelf: "center" }}
+          />
+          <Text style={{ fontSize: 28, fontWeight: "bold" }}>
+            {markerInfo.location}
+          </Text>
+          <Text
+            style={{ fontSize: 20, fontWeight: "bold", paddingVertical: 5 }}
+          >
+            Number of Cases: {markerInfo.count}
+          </Text>
+          <View>
+            <Text
+              style={{ fontSize: 18, fontWeight: "bold", paddingVertical: 5 }}
+            >
+              Date(s) Of Occurence:
+            </Text>
+            <ScrollView
+              style={styleSheetStyles.datesSectionContainer}
+              contentContainerStyle={{ justifyContent: "space-around" }}
+              showsVerticalScrollIndicator={false}
+            >
+              {markerDates.map((thing, index) => {
+                return (
+                  <View key={index} style={styleSheetStyles.datesSection}>
+                    <Text style={styleSheetStyles.listData}>{thing[1]}</Text>
+                    <Text style={styleSheetStyles.listData}> (</Text>
+                    <Text style={styleSheetStyles.listData}>{thing[0]}</Text>
+                    <Text style={styleSheetStyles.listData}> 2021) </Text>
+                  </View>
+                );
+              })}
+            </ScrollView>
           </View>
+        </View>}
+
+
         </Animated.View>
       </PanGestureHandler>
+  
     </>
   );
 };
