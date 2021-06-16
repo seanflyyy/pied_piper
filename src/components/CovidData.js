@@ -34,15 +34,15 @@ export default class CovidData extends Component {
         },
 
         {
-          "Last Updated": "14 Jun 2021",
+          "Last Updated": "14 June 2021",
           "Average Daily Swabs Per Week": 63200,
           "Total Swabs Tested": 12809152,
         },
         {
-          "Last Updated": "14 Jun 2021",
+          "Last Updated": "14 June 2021",
           "Received at least First Dose": 2700446,
-          "Percentage of Population Vaccinated": 45.79599456372613,
-          "Completed Full Vaccination Regimen": 1990940,
+          "% of Population Vaccinated": 45.795,
+          "Completed Full Vaccination": 1990940,
           "Total Doses Administered": 4691386,
         },
       ],
@@ -129,7 +129,7 @@ export default class CovidData extends Component {
             <Text style={{ fontWeight: "bold" }}>Population Vaccinated</Text>
             <Text style={{ fontWeight: "bold", color: "red" }}>
               {this.state.categories[3][
-                "Percentage of Population Vaccinated"
+                "% of Population Vaccinated"
               ].toFixed(2)}
               %
             </Text>
@@ -137,7 +137,7 @@ export default class CovidData extends Component {
           <ProgressBar
             style={{ position: "absolute" }}
             progress={
-              this.state.categories[3]["Percentage of Population Vaccinated"] /
+              this.state.categories[3]["% of Population Vaccinated"] /
               100
             }
             color={Colors.red800}

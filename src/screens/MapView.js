@@ -149,43 +149,43 @@ export default class HomePage extends Component {
           rotateEnable={false}
           showsUserLocation={true}
           showsPointsOfInterest={false}
-          // initialRegion={this.state.region}
-          // customMapStyle={[
-          //   {
-          //     featureType: "administrative",
-          //     elementType: "geometry",
-          //     stylers: [
-          //     {
-          //         visibility: "off"
-          //     }
-          //     ]
-          //   },
-          //   {
-          //     featureType: "poi",
-          //     stylers: [
-          //       {
-          //         visibility: "off"
-          //       }
-          //     ]
-          //   },
-          //   {
-          //     featureType: "road",
-          //     elementType: "labels.icon",
-          //     stylers: [
-          //       {
-          //         visibility: "off"
-          //       }
-          //     ]
-          //   },
-          //   {
-          //     featureType: "transit",
-          //     stylers: [
-          //       {
-          //         visibility: "off"
-          //       }
-          //     ]
-          //   }
-          // ]}
+          provider={"google"}
+          customMapStyle={[
+            {
+              featureType: "administrative",
+              elementType: "geometry",
+              stylers: [
+              {
+                  visibility: "off"
+              }
+              ]
+            },
+            {
+              featureType: "poi",
+              stylers: [
+                {
+                  visibility: "off"
+                }
+              ]
+            },
+            {
+              featureType: "road",
+              elementType: "labels.icon",
+              stylers: [
+                {
+                  visibility: "off"
+                }
+              ]
+            },
+            {
+              featureType: "transit",
+              stylers: [
+                {
+                  visibility: "off"
+                }
+              ]
+            }
+          ]}
           ref={(map) => (this.map = map)}
           followsUserLocation={true}
           initialRegion={this.state.region}
