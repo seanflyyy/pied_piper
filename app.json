@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "uber-clone",
-    "slug": "uber-clone",
+    "name": "Pied Piper ",
+    "slug": "pied-piper",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,10 +23,13 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.zenithapogee.piedpiper"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Cat1Team20 CodeExp",
+    "githubUrl": "https://github.com/seanflyyy/pied_piper"
   }
 }
