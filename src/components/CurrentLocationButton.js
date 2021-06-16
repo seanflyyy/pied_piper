@@ -17,7 +17,7 @@ export const CurrentLocationButton = function(props) {
     /* Ternary operator on next line, if props.bottom exists, then 
     set it to the variable after the question mark, else set it 
     to the variable after the colon. */
-    const bottom = props.bottom ? props.bottom : 200; 
+    const bottom = props.bottom ? props.bottom : 130; 
 
     return (
         <View style={[styles.container, {top: HEIGHT - bottom}]}>

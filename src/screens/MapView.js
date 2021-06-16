@@ -13,6 +13,9 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
+import {
+  withSpring,
+} from "react-native-reanimated";
 
 import MapView from "react-native-maps";
 import { CurrentLocationButton } from "../components/CurrentLocationButton.js";
@@ -25,7 +28,7 @@ import BottomSheet from "../components/BottomSheet.js";
 // import BottomSheetScreen from "@gorhom/bottom-sheet";
 
 // const events = require("../data/events.json")
-const customData = require("../data/events.json");
+const customData = require("../data/eventsNew.json");
 const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = 220;
 const CARD_WIDTH = width * 0.8;
@@ -110,10 +113,6 @@ export default class HomePage extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <CurrentLocationButton
-          cb={() => {this.centerMap();}}
-        />
-
         {/* <BottomSheetScreen style={{position: 'absolute'}}/> */}
         <MapView
           showsCompass={false}
@@ -127,6 +126,7 @@ export default class HomePage extends Component {
           style={styles.container}
         >
           {this.state.markers.map((marker, index) => {
+            console.log(marker)
             return (
               <MapView.Marker
                 key={index}
@@ -161,8 +161,12 @@ export default class HomePage extends Component {
           </View>
           <CovidData />
 
-        </View>
-        {/* <BottomSheet markerInfo = {this.state.selectedMarker}/> */}
+        </View >
+        <CurrentLocationButton
+          cb={() => {this.centerMap(), this.setState({showSheet: false}) 
+          }}/>
+
+          <BottomSheet markerInfo={this.state.selectedMarker} showBottomSheet={this.state.showSheet}/>
 
       </View>
     );

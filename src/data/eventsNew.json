@@ -1,0 +1,194 @@
+[
+  {
+    "location": "AJ Hackett Sentosa",
+    "coordinate": {
+      "latitude": 1.2551579,
+      "longitude": 103.8133231
+    },
+    "price": "15.00",
+    "bookingLink": "https://www.skyparkglobal.com/sg-en/sentosa",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/aaj-hackett-sentosa-470x280.png",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/skypark.png",
+    "type": "attractions"
+  },
+  {
+    "location": "The Original Singapore Walks",
+    "coordinate": {
+      "latitude": 1.285506,
+      "longitude": 103.783144
+    },
+    "price": "40.00",
+    "bookingLink": "https://www.journeys.com.sg/tosw/the-ticket-shop/of-graves-guns-and-battles",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/the-original-singapore-walks-470x280.png",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/tosw.png",
+    "type": "nature"
+  },
+  {
+    "location": "Battlebox",
+    "coordinate": {
+      "latitude": 1.2961611,
+      "longitude": 103.8461761
+    },
+    "price": "20.00",
+    "bookingLink": "https://www.battlebox.com.sg/ticketing.html",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/battlebox-fortress-plotting-room-470x280.png",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/battlebox.png",
+    "type": "war"
+  },
+  {
+    "location": "Singapore Flyer",
+    "coordinate": {
+      "latitude": 1.2892988,
+      "longitude": 103.8631368
+    },
+    "price": "10.00",
+    "bookingLink": "https://www.singaporeflyer.com/en/srv",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/singapore-flyer-ticket-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/singapore-flyer.png",
+    "type": "attractions"
+  },
+  {
+    "location": "Gardens By The Bay",
+    "coordinate": {
+      "latitude": 1.2815683,
+      "longitude": 103.8636132
+    },
+    "price": "8.00",
+    "bookingLink": "https://ticket.gardensbythebay.com.sg/product/listing",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/gbtb-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/gbtb.png",
+    "type": "nature"
+  },
+  {
+    "location": "Jewel Changi Airport Canopy Park Attractions",
+    "coordinate": {
+      "latitude": 1.360261,
+      "longitude": 103.9892345
+    },
+    "price": "4.50",
+    "bookingLink": "https://www.jewelchangiairport.com/en/ticketing.html",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/jewel-canopy-bridge-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/jewelchangi.png",
+    "type": "airport"
+  },
+  {
+    "location": "Mega Adventure",
+    "coordinate": {
+      "latitude": 1.2559413,
+      "longitude": 103.8122967
+    },
+    "price": "20.00",
+    "bookingLink": "https://www.sg.megaadventure.com/sg-rediscover",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/megazip-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/mega-adventure.png",
+    "type": "nature"
+  },
+  {
+    "location": "Night Safari",
+    "coordinate": {
+      "latitude": 1.4021872,
+      "longitude": 103.7880606
+    },
+    "price": "37.10",
+    "bookingLink": "https://www.wrs.com.sg/en/ticketing/admission-and-rides/parks-selection.html",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/night-safari-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/night-sarafai.png",
+    "type": "animal"
+  },
+  {
+    "location": "River Safari",
+    "coordinate": {
+      "latitude": 1.403186,
+      "longitude": 103.7906876
+    },
+    "price": "30.40",
+    "bookingLink": "https://www.wrs.com.sg/en/ticketing/admission-and-rides/parks-selection.html",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/river-safari-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/riversafari.png",
+    "type": "animal"
+  },
+  {
+    "location": "Changi Experience Studio",
+    "coordinate": {
+      "latitude": 1.3598541,
+      "longitude": 103.9892345
+    },
+    "price": "19.00",
+    "bookingLink": "https://www.jewelchangiairport.com/en/ticketing.html",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/ces-sky-deck-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/changi-experience-studio.png",
+    "type": "airport"
+  },
+  {
+    "location": "Jurong Bird Park ",
+    "coordinate": {
+      "latitude": 1.3187065,
+      "longitude": 103.7064417
+    },
+    "price": "27.20",
+    "bookingLink": "https://www.wrs.com.sg/en/ticketing/admission-and-rides/parks-selection.html",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/jurong-bird-park-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/jurong-birdpark.png",
+    "type": "animal"
+  },
+  {
+    "location": "Singapore Zoo",
+    "coordinate": {
+      "latitude": 1.4043485,
+      "longitude": 103.793023
+    },
+    "price": "32.80",
+    "bookingLink": "https://www.wrs.com.sg/en/ticketing/admission-and-rides/parks-selection.html",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/zoo-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/singapore-zoo.png",
+    "type": "animal"
+  },
+  {
+    "location": "Science Centre Singapore",
+    "coordinate": {
+      "latitude": 1.3331687,
+      "longitude": 103.7356443
+    },
+    "price": "2.00",
+    "bookingLink": "https://www.science.edu.sg/buy-tickets",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/science-centre-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/science-centre.png",
+    "type": "science"
+  },
+  {
+    "location": "National Gallery Singapore",
+    "coordinate": {
+      "latitude": 1.2902217,
+      "longitude": 103.8515167
+    },
+    "price": "12.00",
+    "bookingLink": "https://tickets.nationalgallery.sg/",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/national-gallery-singapore-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/national-gallery-singapore.png",
+    "type": "museum"
+  },
+  {
+    "location": "Wild Wild Wet",
+    "coordinate": {
+      "latitude": 1.3774226,
+      "longitude": 103.9547787
+    },
+    "price": "24.00",
+    "bookingLink": "https://www.wildwildwet.com/",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/wilwildwet-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/wild-wild-wet.png",
+    "type": "attractions"
+  },
+  {
+    "location": "ArtScience Museum",
+    "coordinate": {
+      "latitude": 1.2862738,
+      "longitude": 103.8592663
+    },
+    "price": "16.00",
+    "bookingLink": "https://www.marinabaysands.com/museum/ticket.html",
+    "locationImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/book-directly/june-2021/asm-470x280.jpg",
+    "companyImage": "visitsingapore.com/content/dam/vs/srv-bau-deals/partner-logos/artscience.png",
+    "type": "museum"
+  }
+]
