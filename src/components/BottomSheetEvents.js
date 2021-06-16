@@ -38,9 +38,11 @@ const BottomSheet = (props) => {
   });
 
   const markerInfo = props.markerInfo;
+  const markerLocation = props.showCovidSheet ? markerInfo.location.split(/[()]+/).filter(function(e) { return e; }) : [0, 0]
+
   const markerLink = String(markerInfo.bookingLink);
   const markerImage = markerInfo.locationImage
-  const markerDates = props.showCovidSheet ? markerInfo.list_of_dates : [0, 0];
+  const markerDates = props.showCovidSheet ? markerInfo.list_of_dates.reverse() : [0, 0];
 
   const dimensions = useWindowDimensions();
 
@@ -139,6 +141,7 @@ const BottomSheet = (props) => {
 
   return (
     <>
+    {console.log('marker info is', props.markerInfo)}
       <PanGestureHandler onGestureEvent={gestureHandler}>
         <Animated.View style={[styleSheetStyles.Animated, style]}>
 
@@ -160,7 +163,7 @@ const BottomSheet = (props) => {
             <Image
             style={{position: 'relative', padding: 70, marginTop: 10}}
               source={{
-                uri: 'https://www.' + String(markerImage),
+                uri: "https://www." + String(markerImage),
               }}
             />
             <TouchableOpacity
@@ -184,13 +187,30 @@ const BottomSheet = (props) => {
             style={{ alignSelf: "center" }}
           />
           <Text style={{ fontSize: 28, fontWeight: "bold" }}>
-            {markerInfo.location}
+            {markerLocation[0]}
           </Text>
-          <Text
-            style={{ fontSize: 20, fontWeight: "bold", paddingVertical: 5 }}
-          >
-            Number of Cases: {markerInfo.count}
+          <Text style={{fontSize: 18, fontWeight:'bold', color:'gray'}}>
+            {markerLocation[1]}
           </Text>
+          <View style={{flexDirection: 'row', paddingVertical: 10}}> 
+            <Text
+              style={{ fontSize: 20, fontWeight: "bold", paddingVertical: 5 }}>
+              Number of Cases:  
+            </Text>
+            <Text> </Text>
+            <Text
+            style={{ fontSize: 20, fontWeight: "bold", paddingVertical: 5, color:'red' }}>
+            {markerInfo.count}
+          </Text>
+          </View>
+
+          
+          {/* <Image
+            style={{position: 'relative', padding: 70, marginTop: 10}}
+              source={{
+                uri: "https://" + String(markerInfo.image_url),
+              }}
+            /> */}
           <View>
             <Text
               style={{ fontSize: 18, fontWeight: "bold", paddingVertical: 5 }}

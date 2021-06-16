@@ -29,8 +29,9 @@ import CovidData from "../components/CovidData.js";
 import { color } from "react-native-reanimated";
 // import CovidSheet from "../components/CovidSheetEvents.js"
 import BottomSheet from "../components/BottomSheetEvents.js";
+import { StatusBar } from "expo-status-bar";
 const eventsData = require("../data/eventsNew.json");
-const covidMarkerData = require("../data/covid_locations.json");
+const covidMarkerData = require("../data/covid_locations (1).json");
 
 const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = 220;
@@ -78,6 +79,7 @@ export default class HomePage extends Component {
       selectedMarker: [],
       showEventSheet: false,
       showCovidSheet: false, 
+      scaleAmount: 1,
     };
     this.animation = new Animated.Value(0);
     this.getLocationAsync();
@@ -110,33 +112,37 @@ export default class HomePage extends Component {
     });
   }
 
-  onMarkerPress = (mapEventData, marker) => {
-    const markerID = mapEventData._targetInst.return.key;
-    console.log(markerID);
-    let x = markerID * CARD_WIDTH + markerID * 20;
-    if (Platform.OS === "ios") {
-      x = x - SPACING_FOR_CARD_INSET;
-    }
+  // onMarkerPress = (mapEventData, marker) => {
+  //   const markerID = mapEventData._targetInst.return.key;
+  //   console.log(markerID);
+  //   let x = markerID * CARD_WIDTH + markerID * 20;
+  //   if (Platform.OS === "ios") {
+  //     x = x - SPACING_FOR_CARD_INSET;
+  //   }
 
-    this.scroll.scrollTo({ x: x, y: 0, animated: false });
-  };
+  //   this.scroll.scrollTo({ x: x, y: 0, animated: false });
+  // };
 
+  onMarkerPress = {
+    
+  }
   render() {
-    // const interpolations = this.state.eventMarker.map((marker, index) => {
-    //   const inputRange = [
-    //     (index - 1),
-    //     index ,
-    //     (index + 1),
-    //   ];
-    //   const scale = this.animation.interpolate({
-    //     inputRange,
-    //     outputRange: [1, 1.5, 1],
-    //     extrapolate: "clamp",
-    //   });
-    //   return scale;
-    // });
+    const interpolations = this.state.eventMarker.map((marker, index) => {
+      const inputRange = [
+        (index - 1),
+        index ,
+        (index + 1),
+      ];
+      const scale = this.animation.interpolate({
+        inputRange,
+        outputRange: [1, 2, 1],
+        extrapolate: "clamp",
+      });
+      return scale;
+    });
     return (
       <View style={styles.container}>
+        <StatusBar hidden/>
         {/* <BottomSheetScreen style={{position: 'absolute'}}/> */}
         <MapView
           showsCompass={false}
@@ -167,15 +173,15 @@ export default class HomePage extends Component {
                     longitudeDelta: 0.030142817690068,
                   });
                   this.setState({ selectedMarker: marker, showEventSheet: true, showCovidSheet: false});
+                  // this.setState({marker:{scale: 2}})
                 }}>
-                <Animated.View
+                <View
                   style={[
                     styles.ring, 
-                    // scaleStyle,
                     { backgroundColor: colorOfEvent[marker.type]}]}>
                   {typesOfEvents[marker.type]}
                   {/* <Text style={{fontSize: 8, fontWeight: 'bold', color: colorOfEvent[marker.type]}}>{marker.location}</Text> */}
-                </Animated.View>
+                </View>
               </MapView.Marker>
             );
           })}
@@ -192,14 +198,16 @@ export default class HomePage extends Component {
                     longitudeDelta: 0.030142817690068,
                   });
                   this.setState({ selectedMarker: marker, showCovidSheet: true, showEventSheet: false});
+                  // this.setState({marker:{scale: 2}})
                 }}
               >
                 <View
                   style={[
                     styles.ring,
-                    { backgroundColor: 'red' },
-                  ]}
-                >
+                    { backgroundColor: 'red', 
+                    // transform: [{ scale: marker.scale}]
+                  },
+                  ]}>
                   <MaterialIcons name="coronavirus" size={14} color="white" />
                 </View>
               </MapView.Marker>
@@ -208,19 +216,19 @@ export default class HomePage extends Component {
         </MapView>
 
         <View style={styles.container_top}>
-          <View style={styles.searchBox}>
+          {/* <View style={styles.searchBox}>
             <TextInput
               placeholder="Search here"
               placeholderTextColor="#000"
               autoCapitalize="none"
               style={{ flex: 1, padding: 0 }}
             />
-          </View>
+          </View> */}
           <CovidData />
         </View>
         <CurrentLocationButton
           cb={() => {
-            this.centerMap(), this.setState({ showCovidSheet: false, showCovidSheet: false });
+            this.centerMap(), this.setState({ showEventSheet: false, showCovidSheet: false });
           }}
         />
         {/* <CovidSheet markerInfo={this.state.selectedMarker}
@@ -242,7 +250,7 @@ const styles = StyleSheet.create({
   },
   container_top: {
     position: "absolute",
-    marginTop: Platform.OS === "ios" ? 60 : 20,
+    marginTop: Platform.OS === "ios" ? 50 : 20,
     width: "90%",
     alignSelf: "center",
   },

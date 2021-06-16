@@ -6,89 +6,69 @@ import {
   ScrollView,
   Pressable,
   Modal,
-  Animated
+  Animated,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { EvilIcons } from "@expo/vector-icons";
 import { ProgressBar, Colors } from "react-native-paper";
-
+// import Animated, {useSharedValue, useAnimatedStyle } from 'react-native-reanimated'
 export default class CovidData extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      section: {
-        cases_section: {
-          cases_date_updated: "14 June 2021",
-          active_cases: 373,
-          deaths: 34,
-          discharged: 61894,
-          hospitalised_critical: 2,
-          hospitalised_stable: 136,
-          in_community_facilities: 235,
-        },
-        imported_cases_section: {
-          imported_cases_date_updated: "14 June 2021",
-          imported_cases: 4728,
-          imported_cases_change: "+6",
-        },
-        swab_section: {
-          avg_daily_swab: 59900,
-          total_swab: 12366898,
-          total_swab_one_mil: 2169600,
-        },
-        vax_section: {
-          full_vax: 1888253,
-          total_vax: 4392067,
-          vax_first_dose: 2503814,
-          vaxx_percentage: 42.46137576258936,
-        },
-      },
       categories: [
         {
-          active_cases: 373,
-          cases_date_updated: "14 June 2021",
-          deaths: 34,
-          discharged: 61894,
-          hospitalised_critical: 2,
-          hospitalised_stable: 136,
-          in_community_facilities: 235,
+          "Last Updated": "15 June 2021",
+          "Active Cases": 370,
+          Discharged: 61911,
+          "In Community Facilities": 233,
+          "Hospitalised (Stable)": 135,
+          "Hospitalised (Critical)": 2,
+          Deaths: 34,
         },
         {
-          imported_cases: 4728,
-          imported_cases_change: "+6",
-          imported_cases_date_updated: "14 June 2021",
+          "Last Updated": "15 June 2021",
+          "Total Number of Imported Cases": 4728,
+          "Increase in Imported Cases": "+0",
+        },
+
+        {
+          "Last Updated": "14 Jun 2021",
+          "Average Daily Swabs Per Week": 63200,
+          "Total Swabs Tested": 12809152,
         },
         {
-          avg_daily_swab: 59900,
-          total_swab: 12366898,
-          total_swab_one_mil: 2169600,
-        },
-        {
-          full_vax: 1888253,
-          total_vax: 4392067,
-          vax_first_dose: 2503814,
-          vaxx_percentage: 42.46137576258936,
+          "Last Updated": "14 Jun 2021",
+          "Received at least First Dose": 2700446,
+          "Percentage of Population Vaccinated": 45.79599456372613,
+          "Completed Full Vaccination Regimen": 1990940,
+          "Total Doses Administered": 4691386,
         },
       ],
       dataToDisplay: [],
       key: 0,
       dataVisible: false,
-      selectedButton: '',
+      selectedButton: "",
     };
-    this.fadeAnim = new Animated.Value(0)
+    this.fadeAnim = new Animated.Value(0);
   }
 
-   fadeIn = () => {
+  fadeIn = () => {
     // Will change fadeAnim value to 1 in 5 seconds
     Animated.timing(this.fadeAnim, {
       toValue: 1,
       duration: 200,
       useNativeDriver: true,
     }).start();
+    Animated.spring(this.fadeAnim, {
+      toValue: 0,
+      delay: 0, 
+      useNativeDriver: true,
+    })
   };
 
-   fadeOut = () => {
+  fadeOut = () => {
     // Will change fadeAnim value to 0 in 3 seconds
     Animated.timing(this.fadeAnim, {
       toValue: 0,
@@ -96,7 +76,7 @@ export default class CovidData extends Component {
       useNativeDriver: true,
     }).start();
   };
-  
+
   displayExtraData = (index, visible) => {
     const chip = this.state.categories[index];
     const values = Object.values(chip);
@@ -112,14 +92,16 @@ export default class CovidData extends Component {
     });
   };
 
-   capitalizeTheFirstLetterOfEachWord = (words) => {
-    var separateWord = words.toLowerCase().split(' ');
+
+
+  capitalizeTheFirstLetterOfEachWord = (words) => {
+    var separateWord = words.toLowerCase().split(" ");
     for (var i = 0; i < separateWord.length; i++) {
-       separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
-       separateWord[i].substring(1);
+      separateWord[i] =
+        separateWord[i].charAt(0).toUpperCase() + separateWord[i].substring(1);
     }
-    return separateWord.join(' ');
-  }
+    return separateWord.join(" ");
+  };
 
   render() {
     let lst = this.state.categories;
@@ -127,68 +109,103 @@ export default class CovidData extends Component {
 
     return (
       <View>
-        <View style={styles.vaccinatedBar}
-        // onPress={() => this.setState({ selectedButton: 'button1' })}
+        <TouchableOpacity
+          style={[
+            styles.vaccinatedBar,
+            {
+              borderColor:
+                this.state.selectedButton === "button1" ? "#26b99d" : "white",
+            },
+          ]}
+          onPress={() => {
+            this.setState({ selectedButton: "button1" });
+            this.displayExtraData(3, true);
+            this.fadeIn();
+          }}
         >
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <Text style={{ fontWeight: "bold" }}>Vaccinated individuals</Text>
+            <Text style={{ fontWeight: "bold" }}>Population Vaccinated</Text>
             <Text style={{ fontWeight: "bold", color: "red" }}>
-              {this.state.section.vax_section.vaxx_percentage.toFixed(2)}%
+              {this.state.categories[3][
+                "Percentage of Population Vaccinated"
+              ].toFixed(2)}
+              %
             </Text>
           </View>
           <ProgressBar
             style={{ position: "absolute" }}
-            progress={this.state.section.vax_section.vaxx_percentage / 100}
+            progress={
+              this.state.categories[3]["Percentage of Population Vaccinated"] /
+              100
+            }
             color={Colors.red800}
           />
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.container}>
           <TouchableOpacity
-            style={[styles.chipsItem, {borderColor: this.state.selectedButton==='button2' ? '#26b99d' : 'white'}]}
+            style={[
+              styles.chipsItem,
+              {
+                borderColor:
+                  this.state.selectedButton === "button2" ? "#26b99d" : "white",
+              },
+            ]}
             onPress={() => {
-              this.displayExtraData(0, true)
-              this.fadeIn()
-              this.setState({ selectedButton: 'button2' })
-            }
-          }
+              this.displayExtraData(0, true);
+              this.fadeIn();
+              this.setState({ selectedButton: "button2" });
+            }}
           >
             <Text style={styles.boxName}>Active: </Text>
             <Text style={styles.boxElement}>
-              {this.state.section.cases_section.active_cases}
+              {this.state.categories[0]["Active Cases"]}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.chipsItem, {borderColor: this.state.selectedButton==='button3' ? '#26b99d' : 'white'}]}
+            style={[
+              styles.chipsItem,
+              {
+                borderColor:
+                  this.state.selectedButton === "button3" ? "#26b99d" : "white",
+              },
+            ]}
             onPress={() => {
-              this.displayExtraData(1, true)
-              this.fadeIn()
-              this.setState({ selectedButton: 'button3' })
-            }
-          }          >
+              this.displayExtraData(1, true);
+              this.fadeIn();
+              this.setState({ selectedButton: "button3" });
+            }}
+          >
             <Text style={styles.boxName}>Imported: </Text>
             <Text style={styles.boxElement}>
-              {this.state.section.imported_cases_section.imported_cases_change}
+              {this.state.categories[1]["Increase in Imported Cases"]}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.chipsItem, {borderColor: this.state.selectedButton==='button4' ? '#26b99d' : 'white'}]}
+            style={[
+              styles.chipsItem,
+              {
+                borderColor:
+                  this.state.selectedButton === "button4" ? "#26b99d" : "white",
+              },
+            ]}
             onPress={() => {
-              this.displayExtraData(2, true)
-              this.fadeIn()
-              this.setState({ selectedButton: 'button4' })
-            }
-          }
+              this.displayExtraData(2, true);
+              this.fadeIn();
+              this.setState({ selectedButton: "button4" });
+            }}
           >
-            <Text style={styles.boxName}>Swabbed: </Text>
+            <Text style={styles.boxName}>Daily Swabs: </Text>
             <Text style={styles.boxElement}>
-              {this.state.section.swab_section.total_swab.toLocaleString()}
+              {this.state.categories[2][
+                "Average Daily Swabs Per Week"
+              ].toLocaleString()}
             </Text>
           </TouchableOpacity>
         </View>
-          <Animated.View style={{opacity: this.fadeAnim}}> 
+          {this.state.dataVisible && <Animated.View style={{ opacity: this.fadeAnim }}>
             <View style={styles.centeredView}>
               <View
                 style={{
@@ -200,21 +217,31 @@ export default class CovidData extends Component {
                   {this.state.dataToDisplay.map((chips, index) => {
                     return (
                       <View style={styles.extraInfoContainer} key={index}>
-                        <Text style={styles.boxName}>{this.capitalizeTheFirstLetterOfEachWord((chips[0]).replace(/_/g, ' '))} : </Text>
-                        <Text style={styles.boxElement}>{chips[1].toLocaleString()}</Text>
+                        <Text style={styles.boxName}>
+                          {this.capitalizeTheFirstLetterOfEachWord(
+                            chips[0].replace(/_/g, " ")
+                          )}{" "}
+                          :{" "}
+                        </Text>
+                        <Text style={styles.boxElement}>
+                          {chips[1].toLocaleString()}
+                        </Text>
                       </View>
                     );
                   })}
                 </View>
-                <TouchableOpacity onPress={() => {
-                  this.displayExtraData(this.state.key,false)
-                  this.fadeOut()
-                  this.setState({selectedButton: ''})}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.displayExtraData(this.state.key, false);
+                    this.fadeOut();
+                    this.setState({ selectedButton: "" });
+                  }}
+                >
                   <EvilIcons name="close" size={24} color="black" />
                 </TouchableOpacity>
               </View>
             </View>
-          </Animated.View>
+          </Animated.View>}
       </View>
     );
   }
@@ -313,7 +340,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 10,
     borderWidth: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   vaccinatedBar: {
     position: "relative",
@@ -327,8 +354,9 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.5,
-    shadowRadius: 5,
+    shadowRadius: 2,
     elevation: 10,
+    borderWidth: 1,
   },
   scrollView: {
     position: "absolute",
