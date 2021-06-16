@@ -148,8 +148,44 @@ export default class HomePage extends Component {
           showsCompass={false}
           rotateEnable={false}
           showsUserLocation={true}
-          showsMyLocationButton={true}
           showsPointsOfInterest={false}
+          // initialRegion={this.state.region}
+          // customMapStyle={[
+          //   {
+          //     featureType: "administrative",
+          //     elementType: "geometry",
+          //     stylers: [
+          //     {
+          //         visibility: "off"
+          //     }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "poi",
+          //     stylers: [
+          //       {
+          //         visibility: "off"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "road",
+          //     elementType: "labels.icon",
+          //     stylers: [
+          //       {
+          //         visibility: "off"
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     featureType: "transit",
+          //     stylers: [
+          //       {
+          //         visibility: "off"
+          //       }
+          //     ]
+          //   }
+          // ]}
           ref={(map) => (this.map = map)}
           followsUserLocation={true}
           initialRegion={this.state.region}
