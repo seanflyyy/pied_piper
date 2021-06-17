@@ -13,5 +13,5 @@ web-build/
 .DS_Store
 
 # firebase
-database/apiKey.js
+./src/database/apiKey.js
 

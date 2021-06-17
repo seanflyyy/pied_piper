@@ -1,9 +1,10 @@
-import Firebase from "firebase";
-import key from "./apiKey"
+import firebase from 'firebase/app'
+import "firebase/database";
 
 const firebaseConfig = {
-  apiKey: key,
+  apiKey: "AIzaSyCqE2tkNt2KbBNiyKuZnR_LNOn1bS4we0A",
   authDomain: "pied-piper-818c9.firebaseapp.com",
+  databaseURL: "https://pied-piper-818c9-default-rtdb.firebaseio.com",
   projectId: "pied-piper-818c9",
   storageBucket: "pied-piper-818c9.appspot.com",
   messagingSenderId: "97675999272",
@@ -11,6 +12,13 @@ const firebaseConfig = {
   measurementId: "G-RPCQJQS1B6"
 };
 
-const app = Firebase.initializeApp(firebaseConfig);
-export const db = app.database();
+firebase.initializeApp(firebaseConfig);
 
+function storeHighScore(userId, score) {
+  firebase
+    .database()
+    .ref('users/' + userId)
+    .set({
+      highscore: score,
+    });
+}

@@ -12,6 +12,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { EvilIcons } from "@expo/vector-icons";
 import { ProgressBar, Colors } from "react-native-paper";
 // import Animated, {useSharedValue, useAnimatedStyle } from 'react-native-reanimated'
+
+const borderRadius = 10;
+
 export default class CovidData extends Component {
   constructor(props) {
     super(props);
@@ -254,7 +257,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     width: "100%",
     alignSelf: "center",
-    borderRadius: 5,
+    borderRadius: borderRadius,
     padding: 8,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
@@ -269,11 +272,11 @@ const styles = StyleSheet.create({
   extraInfoContainer: {
     flexDirection: "row",
     elevation: 10,
-    marginTop: 4,
+    marginVertical: 5,
   },
   modalView: {
     backgroundColor: "white",
-    borderRadius: 5,
+    borderRadius: borderRadius,
     padding: 9,
     alignItems: "center",
     shadowColor: "#000",
@@ -284,7 +287,7 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   button: {
-    borderRadius: 5,
+    borderRadius: borderRadius,
     padding: 10,
     elevation: 2,
   },
@@ -320,6 +323,7 @@ const styles = StyleSheet.create({
   },
   boxElement: {
     fontSize: 13,
+    fontWeight: "bold",
     color: "red",
   },
   chipsScrollView: {
@@ -331,8 +335,9 @@ const styles = StyleSheet.create({
   },
   chipsItem: {
     flexDirection: "row",
-    borderRadius: 5,
+    borderRadius: borderRadius,
     padding: 5,
+    paddingVertical: 10,
     height: "auto",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
@@ -349,8 +354,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     width: "100%",
     alignSelf: "center",
-    borderRadius: 5,
-    padding: 11,
+    borderRadius: borderRadius,
+    padding: 14,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.5,
@@ -372,7 +377,7 @@ const styles = StyleSheet.create({
     width: "40%",
     backgroundColor: "#fff",
     alignSelf: "flex-start",
-    borderRadius: 5,
+    borderRadius: borderRadius,
     padding: 8,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },

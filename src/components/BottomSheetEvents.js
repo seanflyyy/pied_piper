@@ -126,7 +126,7 @@ const BottomSheet = (props) => {
     },
     onEnd() {
       // Dismissing snap point
-      if (top.value > dimensions.height / 2 + 200) {
+      if (top.value > dimensions.height / 2 + 30) {
         top.value = dimensions.height;
       } else {
         top.value = dimensions.height / 2 + 30;
@@ -141,7 +141,6 @@ const BottomSheet = (props) => {
 
   return (
     <>
-    {console.log('marker info is', props.markerInfo)}
       <PanGestureHandler onGestureEvent={gestureHandler}>
         <Animated.View style={[styleSheetStyles.Animated, style]}>
 
