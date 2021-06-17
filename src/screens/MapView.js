@@ -12,9 +12,10 @@ import {
   Modal,
   Pressable,
   ScrollView,
+  LogBox,
 } from "react-native";
 
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import * as Location from "expo-location";
 import {
   MaterialIcons,
@@ -34,14 +35,13 @@ import firebase from "firebase/app";
 import "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCqE2tkNt2KbBNiyKuZnR_LNOn1bS4we0A",
-  authDomain: "pied-piper-818c9.firebaseapp.com",
-  databaseURL: "https://pied-piper-818c9-default-rtdb.firebaseio.com",
-  projectId: "pied-piper-818c9",
-  storageBucket: "pied-piper-818c9.appspot.com",
-  messagingSenderId: "97675999272",
-  appId: "1:97675999272:web:60b6333232814d9f5d1d1d",
-  measurementId: "G-RPCQJQS1B6",
+  apiKey: "AIzaSyA2hxPW1qn6BscvSLmH5UA4ZacRtpDLwy4",
+  authDomain: "code-exp-moh-database.firebaseapp.com",
+  databaseURL: "https://code-exp-moh-database-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "code-exp-moh-database",
+  storageBucket: "code-exp-moh-database.appspot.com",
+  messagingSenderId: "122734261014",
+  appId: "1:122734261014:web:db8ec1c916ac542bbc1637"
 };
 
 if (!firebase.apps.length) {
@@ -90,9 +90,15 @@ export default class HomePage extends Component {
     super(props);
 
     this.state = {
-      eventMarker: eventsData,
-      covidMarker: covidMarkerData,
-      region: null,
+      eventMarker: [],
+      covidMarker: [],
+      CovidMarkerss : [],
+      region: {
+        latitude: 1.3753687228060716,
+        longitude: 103.80715617460423,
+        latitudeDelta: 0.5,
+        longitudeDelta: 0.5,
+      },
       allTheMarkers: [],
       covidCases: 300,
       selectedMarker: [],
@@ -106,7 +112,9 @@ export default class HomePage extends Component {
     this.getLocationAsync();
     this.setProvider();
     this.storeHighScore(1, 1);
-    this.setupHighscoreListener("38");
+    this.setupHighscoreListener();
+    // this.convertDictionary();
+    LogBox.ignoreLogs(['Setting a timer'])
   }
 
   componentDidMount() {
@@ -135,10 +143,9 @@ export default class HomePage extends Component {
       latitudeDelta: 0.0464195044303443,
       longitudeDelta: 0.040142817690068,
     };
-    if (this._isMounted) {
-      this.setState({ region: region });
-    }
+    this.setState({ region: region });
   };
+
 
   storeHighScore(userId, score) {
     firebase
@@ -149,27 +156,40 @@ export default class HomePage extends Component {
       });
   }
 
-  setupHighscoreListener(userId) {
-    var recentPostsRef = firebase.database().ref();
-    recentPostsRef.once("value").then((snapshot) => {
+  setupHighscoreListener() {
+    const attractionsData = firebase.database().ref("/attractions");
+    const covid_locations = firebase.database().ref("/covid_locations")
+    attractionsData.once("value").then((snapshot) => {
       // snapshot.val() is the dictionary with all your keys/values from the '/store' path
-      this.setState({ allTheMarkers: snapshot.val() });
+      let results_lst = []
+      for(const [key,index] of Object.entries(snapshot.val())){
+        results_lst.push(index)
+      }
+      this.setState({ eventMarker: results_lst });
+    });
+    covid_locations.once("value").then((snapshot) => {
+      let results_lst = []
+      for(const [key,index] of Object.entries(snapshot.val())){
+        results_lst.push(index)
+      }
+      // snapshot.val() is the dictionary with all your keys/values from the '/store' path
+      this.setState({ covidMarker: results_lst});
     });
 
-    console.log(recentPostsRef);
-    firebase.database().ref(userId).on('value', (snapshot) => {
-      const data = snapshot.val();
-      this.setState({allTheMarkers : {
-        coordinate: data.coordinate,
-        count: data.count,
-        image_url: data.image_url,
-        list_of_dates: data.list_of_dates,
-        location: data.location,
-        scale: data.scale
-      }})
-      console.log("New high score: " + data.count);
-    });
+    // firebase.database().ref(userId).on('value', (snapshot) => {
+    //   const data = snapshot.val();
+    //   this.setState({allTheMarkers : {
+    //     coordinate: data.coordinate,
+    //     count: data.count,
+    //     image_url: data.image_url,
+    //     list_of_dates: data.list_of_dates,
+    //     location: data.location,
+    //     scale: data.scale
+    //   }})
+    //   console.log("New high score: " + data.count);
+    // });
   }
+
 
   centerMap() {
     const { latitude, longitude, latitudeDelta, longitudeDelta } =
@@ -184,7 +204,12 @@ export default class HomePage extends Component {
 
   render() {
     {
-      console.log(this.state.allTheMarkers);
+      // const convertDictionary = () => {
+      //   console.log(this.state.covidMarkerss)
+      //   for(const [key,index] of Object.entries(this.state.covidMarkerss)){
+      //     console.log(key, index)
+      //   }
+
     }
     const interpolations = this.state.eventMarker.map((marker, index) => {
       const inputRange = [index - 1, index, index + 1];
@@ -246,10 +271,23 @@ export default class HomePage extends Component {
             },
           ]}
         >
+          
           {this.state.eventMarker.map((marker, index) => {
             // const scaleStyle = {
             //   transform: [{ scale: interpolations[index].scale }],
             // };
+            // console.log("marker is", Object.keys(marker))
+            // const key = Object.keys(marker)
+            // const marker_key = String(key[index])
+            // console.log(Object(this.state.eventMarker).items())
+            // console.log(marker_key)
+            // console.log(String(key[index]))
+            // console.log(key[index])
+            // console.log("coordinate is", marker[marker_key])
+
+            // console.log("coordinate is", marker[marker_key].coordinate)
+            // console.log("longitude is", marker[String(key[index])].coordinate.latitude)
+
             return (
               <MapView.Marker
                 key={index}
@@ -281,15 +319,18 @@ export default class HomePage extends Component {
               </MapView.Marker>
             );
           })}
+          
           {this.state.covidMarker.map((marker, index) => {
+            const key = Object.keys(marker)
+            // console.log(marker.length)
             return (
               <MapView.Marker
                 key={index}
-                coordinate={marker.coordinate}
+                coordinate={marker.coordinates}
                 onPress={() => {
                   this.map.animateToRegion({
-                    latitude: marker.coordinate.latitude,
-                    longitude: marker.coordinate.longitude,
+                    latitude: marker.coordinates.latitude,
+                    longitude: marker.coordinates.longitude,
                     latitudeDelta: 0.03864195044303443,
                     longitudeDelta: 0.030142817690068,
                   });

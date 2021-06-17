@@ -9,7 +9,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomePage from "./src/screens/MapView";
 import BottomSheet from "./src/components/BottomSheetEvents";
 const Stack = createStackNavigator();
-
+// import ScrollView from "./src/components/ScrollView"
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +18,7 @@ export default class App extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home Page" screenOptions={{headerShown: false}}>
+        <Stack.Navigator initialRouteName="Scroll View" screenOptions={{headerShown: false}}>
           <Stack.Screen name="Home Page" component={HomePage}/>
         </Stack.Navigator>
       </NavigationContainer>
