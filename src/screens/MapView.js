@@ -30,7 +30,7 @@ import { CurrentLocationButton } from "../components/CurrentLocationButton.js";
 // import { db } from "../database/realTimeDatabase.js";
 import CovidData from "../components/CovidData.js";
 import BottomSheet from "../components/BottomSheetEvents.js";
-import firebase from 'firebase/app'
+import firebase from "firebase/app";
 import "firebase/database";
 
 const firebaseConfig = {
@@ -41,12 +41,12 @@ const firebaseConfig = {
   storageBucket: "pied-piper-818c9.appspot.com",
   messagingSenderId: "97675999272",
   appId: "1:97675999272:web:60b6333232814d9f5d1d1d",
-  measurementId: "G-RPCQJQS1B6"
+  measurementId: "G-RPCQJQS1B6",
 };
 
 if (!firebase.apps.length) {
-  firebase.initializeApp({});
-}else {
+  firebase.initializeApp(firebaseConfig);
+} else {
   firebase.app(); // if already initialized, use that one
 }
 
@@ -75,8 +75,7 @@ const typesOfEvents = {
     <MaterialCommunityIcons name="elephant" size={sizeOfIcons} color="white" />
   ),
   museum: <MaterialIcons name="museum" size={sizeOfIcons} color="white" />,
-  war: (
-<MaterialCommunityIcons name="tank" size={sizeOfIcons} color="white" />  ),
+  war: <MaterialCommunityIcons name="tank" size={sizeOfIcons} color="white" />,
   airport: (
     <MaterialIcons name="local-airport" size={sizeOfIcons} color="white" />
   ),
@@ -101,39 +100,26 @@ export default class HomePage extends Component {
       showCovidSheet: false,
       scaleAmount: 1,
       provider: null,
+      _isMounted: false,
     };
     this.animation = new Animated.Value(0);
     this.getLocationAsync();
     this.setProvider();
-    // this.storeHighScore(1, 1);
-    // this.setupHighscoreListener('38');
+    this.storeHighScore(1, 1);
+    this.setupHighscoreListener("38");
   }
 
-  // getData = () => {
-  //   key = db()
-  //       .ref()
-  //       .push().key;
-  //   console.log(key)
-  // }
-  // componentDidMount() {
-  //     db.ref().on((querySnapShot) => {
-  //       let data = querySnapShot.val() ? querySnapShot.val() : {};
-  
-  //       let todoItems = { ...data };
-  //       console.log(data);
-  //       this.setState({
-  //         allTheMarkers: todoItems,
-  //       });
-  //     });
-  //   }
-
-
+  componentDidMount() {
+    this._isMounted = true;
+  }
 
   setProvider = () => {
-    if (Platform.OS === "ios") {
-      this.setState({ provider: null });
-    } else {
-      this.setState({ provider: PROVIDER_GOOGLE });
+    if (this._isMounted) {
+      if (Platform.OS === "ios") {
+        this.setState({ provider: null });
+      } else {
+        this.setState({ provider: PROVIDER_GOOGLE });
+      }
     }
   };
 
@@ -149,40 +135,40 @@ export default class HomePage extends Component {
       latitudeDelta: 0.0464195044303443,
       longitudeDelta: 0.040142817690068,
     };
-    this.setState({ region: region });
+    if (this._isMounted) {
+      this.setState({ region: region });
+    }
   };
-
 
   storeHighScore(userId, score) {
     firebase
       .database()
-      .ref('users/' + userId)
+      .ref("users/" + userId)
       .set({
         highscore: score,
       });
   }
 
   setupHighscoreListener(userId) {
-
     var recentPostsRef = firebase.database().ref();
-    recentPostsRef.once('value').then(snapshot => {
+    recentPostsRef.once("value").then((snapshot) => {
       // snapshot.val() is the dictionary with all your keys/values from the '/store' path
-      this.setState({ allTheMarkers: snapshot.val() })
-    })
+      this.setState({ allTheMarkers: snapshot.val() });
+    });
 
-    console.log(recentPostsRef)
-    // firebase.database().ref(userId).on('value', (snapshot) => {
-    //   const data = snapshot.val();
-    //   this.setState({allTheMarkers : {
-    //     coordinate: data.coordinate,
-    //     count: data.count, 
-    //     image_url: data.image_url,
-    //     list_of_dates: data.list_of_dates,
-    //     location: data.location,
-    //     scale: data.scale
-    //   }})
-    //   console.log("New high score: " + data.count);
-    // });
+    console.log(recentPostsRef);
+    firebase.database().ref(userId).on('value', (snapshot) => {
+      const data = snapshot.val();
+      this.setState({allTheMarkers : {
+        coordinate: data.coordinate,
+        count: data.count,
+        image_url: data.image_url,
+        list_of_dates: data.list_of_dates,
+        location: data.location,
+        scale: data.scale
+      }})
+      console.log("New high score: " + data.count);
+    });
   }
 
   centerMap() {
@@ -196,19 +182,10 @@ export default class HomePage extends Component {
     });
   }
 
-  // onMarkerPress = (mapEventData, marker) => {
-  //   const markerID = mapEventData._targetInst.return.key;
-  //   console.log(markerID);
-  //   let x = markerID * CARD_WIDTH + markerID * 20;
-  //   if (Platform.OS === "ios") {
-  //     x = x - SPACING_FOR_CARD_INSET;
-  //   }
-
-  //   this.scroll.scrollTo({ x: x, y: 0, animated: false });
-  // };
-
   render() {
-    {console.log(this.state.allTheMarkers)}
+    {
+      console.log(this.state.allTheMarkers);
+    }
     const interpolations = this.state.eventMarker.map((marker, index) => {
       const inputRange = [index - 1, index, index + 1];
       const scale = this.animation.interpolate({
@@ -231,7 +208,7 @@ export default class HomePage extends Component {
           provider={this.state.provider}
           ref={(map) => (this.map = map)}
           style={styles.container}
-          initial          
+          initial
           customMapStyle={[
             {
               featureType: "administrative",
@@ -268,7 +245,6 @@ export default class HomePage extends Component {
               ],
             },
           ]}
-          
         >
           {this.state.eventMarker.map((marker, index) => {
             // const scaleStyle = {
@@ -357,20 +333,20 @@ export default class HomePage extends Component {
             this.centerMap(), this.setState({ showEventSheet: false, showCovidSheet: false });
           }}
         /> */}
-          <TouchableOpacity
-            style={styles.locationButton}
-            onPress={() => {
-              this.centerMap();
-              this.setState({ showEventSheet: false, showCovidSheet: false });
-            }}
-          >
-            <MaterialIcons name="my-location" color="#000000" size={25} />
-          </TouchableOpacity>
-          <BottomSheet
-            markerInfo={this.state.selectedMarker}
-            showBottomSheet={this.state.showEventSheet}
-            showCovidSheet={this.state.showCovidSheet}
-          />
+        <TouchableOpacity
+          style={styles.locationButton}
+          onPress={() => {
+            this.centerMap();
+            this.setState({ showEventSheet: false, showCovidSheet: false });
+          }}
+        >
+          <MaterialIcons name="my-location" color="#000000" size={25} />
+        </TouchableOpacity>
+        <BottomSheet
+          markerInfo={this.state.selectedMarker}
+          showBottomSheet={this.state.showEventSheet}
+          showCovidSheet={this.state.showCovidSheet}
+        />
       </View>
     );
   }
@@ -447,7 +423,7 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 12,
     alignItems: "center",
-    justifyContent: 'space-evenly',
+    justifyContent: "space-evenly",
     borderWidth: 2,
     borderColor: "white",
   },
