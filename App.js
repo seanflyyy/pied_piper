@@ -18,7 +18,7 @@ export default class App extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Scroll View" screenOptions={{headerShown: false}}>
+        <Stack.Navigator initialRouteName="Home Page" screenOptions={{headerShown: false}}>
           <Stack.Screen name="Home Page" component={HomePage}/>
         </Stack.Navigator>
       </NavigationContainer>

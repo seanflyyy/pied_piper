@@ -14,6 +14,15 @@ import { ProgressBar, Colors } from "react-native-paper";
 // import Animated, {useSharedValue, useAnimatedStyle } from 'react-native-reanimated'
 
 const borderRadius = 10;
+const firebaseConfig = {
+  apiKey: "AIzaSyA2hxPW1qn6BscvSLmH5UA4ZacRtpDLwy4",
+  authDomain: "code-exp-moh-database.firebaseapp.com",
+  databaseURL: "https://code-exp-moh-database-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "code-exp-moh-database",
+  storageBucket: "code-exp-moh-database.appspot.com",
+  messagingSenderId: "122734261014",
+  appId: "1:122734261014:web:db8ec1c916ac542bbc1637"
+};
 
 export default class CovidData extends Component {
   constructor(props) {
@@ -56,6 +65,8 @@ export default class CovidData extends Component {
     };
     this.fadeAnim = new Animated.Value(0);
   }
+
+  
 
   fadeIn = () => {
     // Will change fadeAnim value to 1 in 5 seconds

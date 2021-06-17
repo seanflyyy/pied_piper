@@ -154,10 +154,10 @@ const BottomSheet = (props) => {
     },
     onEnd() {
       // Dismissing snap point
-      if (top.value > dimensions.height / 2 + 30) {
+      if (top.value > dimensions.height / 2) {
         top.value = dimensions.height;
       } else {
-        top.value = dimensions.height / 2;
+        top.value = dimensions.height / 2 + 30; 
       }
     },
   });
