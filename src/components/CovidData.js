@@ -83,13 +83,12 @@ export default class CovidData extends Component {
           "Total Number of Imported Cases": 4740,
         },
         {
-          "Last Updated": "14 Jun 2021",
+          "Last Updated": "14 June 2021",
           "Average Daily Swabs Per Week": 63200,
-          "Total Swabs Per 1,000,000 Total Population": 2247200,
           "Total Swabs Tested": 12809152,
         },
         {
-          "Last Updated": "14 Jun 2021",
+          "Last Updated": "14 June 2021",
           "Completed Full Vaccination Regimen": 1990940,
           "% of Population Vaccinated": 45.795,
           "Received at least First Dose": 2700446,
