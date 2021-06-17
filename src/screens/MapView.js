@@ -144,6 +144,7 @@ export default class HomePage extends Component {
       longitudeDelta: 0.040142817690068,
     };
     this.setState({ region: region });
+    console.log(region)
   };
 
 
@@ -233,7 +234,6 @@ export default class HomePage extends Component {
           provider={this.state.provider}
           ref={(map) => (this.map = map)}
           style={styles.container}
-          initial
           customMapStyle={[
             {
               featureType: "administrative",

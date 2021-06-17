@@ -12,8 +12,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { EvilIcons } from "@expo/vector-icons";
 import { ProgressBar, Colors } from "react-native-paper";
 // import Animated, {useSharedValue, useAnimatedStyle } from 'react-native-reanimated'
+import firebase from "firebase/app";
+import "firebase/database";
 
 const borderRadius = 10;
+
 const firebaseConfig = {
   apiKey: "AIzaSyA2hxPW1qn6BscvSLmH5UA4ZacRtpDLwy4",
   authDomain: "code-exp-moh-database.firebaseapp.com",
@@ -24,12 +27,18 @@ const firebaseConfig = {
   appId: "1:122734261014:web:db8ec1c916ac542bbc1637"
 };
 
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app(); // if already initialized, use that one
+}
 export default class CovidData extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      categories: [
+      section: [],
+      categoriesOld : [
         {
           "Last Updated": "15 June 2021",
           "Active Cases": 370,
@@ -58,15 +67,56 @@ export default class CovidData extends Component {
           "Total Doses Administered": 4691386,
         },
       ],
+      categories : [
+        {
+          "Last Updated": "17 June 2021",
+          "Active Cases": 372,
+          "Deaths": 34,
+          "Discharged": 61960,
+          "Hospitalised (Critical)": 1,
+          "Hospitalised (Stable)": 150,
+          "In Community Facilities": 221,
+        },
+        {
+          "Last Updated": "17 June 2021",
+          "Increase in Imported Cases": "+7",
+          "Total Number of Imported Cases": 4740,
+        },
+        {
+          "Last Updated": "14 Jun 2021",
+          "Average Daily Swabs Per Week": 63200,
+          "Total Swabs Per 1,000,000 Total Population": 2247200,
+          "Total Swabs Tested": 12809152,
+        },
+        {
+          "Last Updated": "14 Jun 2021",
+          "Completed Full Vaccination Regimen": 1990940,
+          "% of Population Vaccinated": 45.795,
+          "Received at least First Dose": 2700446,
+          "Total Doses Administered": 4691386,
+        },
+      ],
       dataToDisplay: [],
       key: 0,
       dataVisible: false,
       selectedButton: "",
     };
     this.fadeAnim = new Animated.Value(0);
+    this.setupHighscoreListener();
   }
 
-  
+  setupHighscoreListener() {
+    const attractionsData = firebase.database().ref("/covid_data");
+    attractionsData.once("value").then((snapshot) => {
+      // snapshot.val() is the dictionary with all your keys/values from the '/store' path
+      let results_lst = []
+      for(const [key,index] of Object.entries(snapshot.val())){
+        results_lst.push(index)
+      }
+      console.log(results_lst)
+      this.setState({ section: results_lst });
+    });
+  }
 
   fadeIn = () => {
     // Will change fadeAnim value to 1 in 5 seconds
@@ -120,7 +170,6 @@ export default class CovidData extends Component {
   render() {
     let lst = this.state.categories;
     lst = lst.slice(0, 3);
-
     return (
       <View>
         <TouchableOpacity
