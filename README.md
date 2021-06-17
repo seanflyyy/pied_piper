@@ -7,4 +7,5 @@ Developed from 14 to 16 June for CODE_EXP, a competition by DSTA , Pied Piper is
 - react 
 - react-native
 - react-native-maps 
-- material icons react-native-reanimated
+- material icons 
+- react-native-reanimated
