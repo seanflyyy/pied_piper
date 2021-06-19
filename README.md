@@ -9,3 +9,11 @@ Developed from 14 to 16 June 2021 for Brainhack 2021 CODE_EXP, a competition by 
 - react-native-maps 
 - material icons 
 - react-native-reanimated
+
+## Set Up 
+``` git clone https://github.com/seanflyyy/pied_piper.git ``` 
+Then run
+``` yarn install ``` 
+or 
+``` npm install ``` 
+After all the dependencies are done installing, you are ready to use the application! 
