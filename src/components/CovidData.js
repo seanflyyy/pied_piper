@@ -99,13 +99,14 @@ export default class CovidData extends Component {
       key: 0,
       dataVisible: false,
       selectedButton: "",
+      _isRetrieved: false, 
     };
     this.fadeAnim = new Animated.Value(0);
-    this.setupHighscoreListener();
+    this.retrieveData();
   }
 
-  setupHighscoreListener() {
-    const attractionsData = firebase.database().ref("/covid_data");
+  retrieveData = () => {
+    let attractionsData = firebase.database().ref("/covid_data");
     attractionsData.once("value").then((snapshot) => {
       // snapshot.val() is the dictionary with all your keys/values from the '/store' path
       let results_lst = []
@@ -113,7 +114,7 @@ export default class CovidData extends Component {
         results_lst.push(index)
       }
       console.log(results_lst)
-      this.setState({ section: results_lst });
+      this.setState({ section: results_lst, _isRetrieved : true});
     });
   }
 
@@ -169,143 +170,149 @@ export default class CovidData extends Component {
   render() {
     let lst = this.state.categories;
     lst = lst.slice(0, 3);
-    return (
-      <View>
-        <TouchableOpacity
-          style={[
-            styles.vaccinatedBar,
-            {
-              borderColor:
-                this.state.selectedButton === "button1" ? "#26b99d" : "white",
-            },
-          ]}
-          onPress={() => {
-            this.setState({ selectedButton: "button1" });
-            this.displayExtraData(3, true);
-            this.fadeIn();
-          }}
-        >
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
+    if (this.state._isRetrieved == true ) 
+      return (
+        <View>
+          <TouchableOpacity
+            style={[
+              styles.vaccinatedBar,
+              {
+                borderColor:
+                  this.state.selectedButton === "button1" ? "#26b99d" : "white",
+              },
+            ]}
+            onPress={() => {
+              this.setState({ selectedButton: "button1" });
+              this.displayExtraData(3, true);
+              this.fadeIn();
+            }}
           >
-            <Text style={{ fontWeight: "bold" }}>Population Vaccinated</Text>
-            <Text style={{ fontWeight: "bold", color: "red" }}>
-              {this.state.categories[3][
-                "% of Population Vaccinated"
-              ].toFixed(2)}
-              %
-            </Text>
-          </View>
-          <ProgressBar
-            style={{ position: "absolute" }}
-            progress={
-              this.state.categories[3]["% of Population Vaccinated"] /
-              100
-            }
-            color={Colors.red800}
-          />
-        </TouchableOpacity>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Text style={{ fontWeight: "bold" }}>Population Vaccinated</Text>
+              <Text style={{ fontWeight: "bold", color: "red" }}>
+                {this.state.categories[3][
+                  "% of Population Vaccinated"
+                ].toFixed(2)}
+                %
+              </Text>
+            </View>
+            <ProgressBar
+              style={{ position: "absolute" }}
+              progress={
+                this.state.categories[3]["% of Population Vaccinated"] /
+                100
+              }
+              color={Colors.red800}
+            />
+          </TouchableOpacity>
 
-        <View style={styles.container}>
-          <TouchableOpacity
-            style={[
-              styles.chipsItem,
-              {
-                borderColor:
-                  this.state.selectedButton === "button2" ? "#26b99d" : "white",
-              },
-            ]}
-            onPress={() => {
-              this.displayExtraData(0, true);
-              this.fadeIn();
-              this.setState({ selectedButton: "button2" });
-            }}
-          >
-            <Text style={styles.boxName}>Active: </Text>
-            <Text style={styles.boxElement}>
-              {this.state.categories[0]["Active Cases"]}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.chipsItem,
-              {
-                borderColor:
-                  this.state.selectedButton === "button3" ? "#26b99d" : "white",
-              },
-            ]}
-            onPress={() => {
-              this.displayExtraData(1, true);
-              this.fadeIn();
-              this.setState({ selectedButton: "button3" });
-            }}
-          >
-            <Text style={styles.boxName}>Imported: </Text>
-            <Text style={styles.boxElement}>
-              {this.state.categories[1]["Increase in Imported Cases"]}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.chipsItem,
-              {
-                borderColor:
-                  this.state.selectedButton === "button4" ? "#26b99d" : "white",
-              },
-            ]}
-            onPress={() => {
-              this.displayExtraData(2, true);
-              this.fadeIn();
-              this.setState({ selectedButton: "button4" });
-            }}
-          >
-            <Text style={styles.boxName}>Daily Swabs: </Text>
-            <Text style={styles.boxElement}>
-              {this.state.categories[2][
-                "Average Daily Swabs Per Week"
-              ].toLocaleString()}
-            </Text>
-          </TouchableOpacity>
-        </View>
-          {this.state.dataVisible && <Animated.View style={{ opacity: this.fadeAnim }}>
-            <View style={styles.centeredView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <View style={{ flexDirection: "column" }}>
-                  {this.state.dataToDisplay.map((chips, index) => {
-                    return (
-                      <View style={styles.extraInfoContainer} key={index}>
-                        <Text style={styles.boxName}>
-                          {this.capitalizeTheFirstLetterOfEachWord(
-                            chips[0].replace(/_/g, " ")
-                          )}{" "}
-                          :{" "}
-                        </Text>
-                        <Text style={styles.boxElement}>
-                          {chips[1].toLocaleString()}
-                        </Text>
-                      </View>
-                    );
-                  })}
-                </View>
-                <TouchableOpacity
-                  onPress={() => {
-                    this.displayExtraData(this.state.key, false);
-                    this.fadeOut();
-                    this.setState({ selectedButton: "" });
+          <View style={styles.container}>
+            <TouchableOpacity
+              style={[
+                styles.chipsItem,
+                {
+                  borderColor:
+                    this.state.selectedButton === "button2" ? "#26b99d" : "white",
+                },
+              ]}
+              onPress={() => {
+                this.displayExtraData(0, true);
+                this.fadeIn();
+                this.setState({ selectedButton: "button2" });
+              }}
+            >
+              <Text style={styles.boxName}>Active: </Text>
+              <Text style={styles.boxElement}>
+                {this.state.categories[0]["Active Cases"]}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.chipsItem,
+                {
+                  borderColor:
+                    this.state.selectedButton === "button3" ? "#26b99d" : "white",
+                },
+              ]}
+              onPress={() => {
+                this.displayExtraData(1, true);
+                this.fadeIn();
+                this.setState({ selectedButton: "button3" });
+              }}
+            >
+              <Text style={styles.boxName}>Imported: </Text>
+              <Text style={styles.boxElement}>
+                {this.state.categories[1]["Increase in Imported Cases"]}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.chipsItem,
+                {
+                  borderColor:
+                    this.state.selectedButton === "button4" ? "#26b99d" : "white",
+                },
+              ]}
+              onPress={() => {
+                this.displayExtraData(2, true);
+                this.fadeIn();
+                this.setState({ selectedButton: "button4" });
+              }}
+            >
+              <Text style={styles.boxName}>Daily Swabs: </Text>
+              <Text style={styles.boxElement}>
+                {this.state.categories[2][
+                  "Average Daily Swabs Per Week"
+                ].toLocaleString()}
+              </Text>
+            </TouchableOpacity>
+          </View>
+            {this.state.dataVisible && <Animated.View style={{ opacity: this.fadeAnim }}>
+              <View style={styles.centeredView}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
                   }}
                 >
-                  <EvilIcons name="close" size={24} color="black" />
-                </TouchableOpacity>
+                  <View style={{ flexDirection: "column" }}>
+                    {this.state.dataToDisplay.map((chips, index) => {
+                      return (
+                        <View style={styles.extraInfoContainer} key={index}>
+                          <Text style={styles.boxName}>
+                            {this.capitalizeTheFirstLetterOfEachWord(
+                              chips[0].replace(/_/g, " ")
+                            )}{" "}
+                            :{" "}
+                          </Text>
+                          <Text style={styles.boxElement}>
+                            {chips[1].toLocaleString()}
+                          </Text>
+                        </View>
+                      );
+                    })}
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.displayExtraData(this.state.key, false);
+                      this.fadeOut();
+                      this.setState({ selectedButton: "" });
+                    }}
+                  >
+                    <EvilIcons name="close" size={24} color="black" />
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          </Animated.View>}
-      </View>
-    );
+            </Animated.View>}
+        </View>
+      );
+    else 
+      return (
+        <View> 
+        </View> 
+      )
   }
 }
 
