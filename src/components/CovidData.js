@@ -16,28 +16,12 @@ import firebase from "firebase/app";
 import "firebase/database";
 
 const borderRadius = 10;
-
-const firebaseConfig = {
-  apiKey: "AIzaSyA2hxPW1qn6BscvSLmH5UA4ZacRtpDLwy4",
-  authDomain: "code-exp-moh-database.firebaseapp.com",
-  databaseURL: "https://code-exp-moh-database-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "code-exp-moh-database",
-  storageBucket: "code-exp-moh-database.appspot.com",
-  messagingSenderId: "122734261014",
-  appId: "1:122734261014:web:db8ec1c916ac542bbc1637"
-};
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-} else {
-  firebase.app(); // if already initialized, use that one
-}
 export default class CovidData extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      section: [],
+      categories: props.categories,
       categoriesOld : [
         {
           "Last Updated": "15 June 2021",
@@ -67,7 +51,7 @@ export default class CovidData extends Component {
           "Total Doses Administered": 4691386,
         },
       ],
-      categories : [
+      section : [
         {
           "Last Updated": "17 June 2021",
           "Active Cases": 372,
@@ -89,7 +73,7 @@ export default class CovidData extends Component {
         },
         {
           "Last Updated": "14 June 2021",
-          "Completed Full Vaccination Regimen": 1990940,
+          "Completed Full Vaccination": 1990940,
           "% of Population Vaccinated": 45.795,
           "Received at least First Dose": 2700446,
           "Total Doses Administered": 4691386,
@@ -99,23 +83,62 @@ export default class CovidData extends Component {
       key: 0,
       dataVisible: false,
       selectedButton: "",
+      _isMounted : false, 
     };
+    // this.updateData();
     this.fadeAnim = new Animated.Value(0);
-    this.setupHighscoreListener();
+    {console.log("imported props data is", this.state.categories)}
   }
 
-  setupHighscoreListener() {
-    const attractionsData = firebase.database().ref("/covid_data");
-    attractionsData.once("value").then((snapshot) => {
-      // snapshot.val() is the dictionary with all your keys/values from the '/store' path
-      let results_lst = []
-      for(const [key,index] of Object.entries(snapshot.val())){
-        results_lst.push(index)
-      }
-      console.log(results_lst)
-      this.setState({ section: results_lst });
-    });
+  componentDidMount() {
+    this._isMounted = true
   }
+  // updateData() {
+  //   const attractionsData = firebase.database().ref("/covid_data");
+  //   attractionsData.once("value").then((snapshot) => {
+  //     // snapshot.val() is the dictionary with all your keys/values from the '/store' path
+  //     let results = [];
+  //     for(const [key, index] of Object.entries(snapshot.val())){
+  //       // const values = Object.values(index)
+  //       // const keys = Object.keys(index)
+  //       // for (let k = 0; k < keys.length; k++){ 
+  //       //   let new_dic_key = keys[k].substring(1)
+          
+  //       //   new_dic[new_dic_key] = values[k]
+  //       // }
+  //       results.push(index)
+  //       console.log(index)
+  //       // console.log("The new dictionary is", new_dic)
+  //       // console.log(results_lst)
+  //       // new_dic = {}
+  //     }
+
+  //     // for (let j = 0; j < results_lst.length; j++) {
+  //     //   let lst = [];
+  //     //   let lst_dic = [];
+  //     //   let chip = results_lst[j];
+  //     //   console.log("chip is", chip)
+  //     //   let values = Object.values(chip);
+  //     //   console.log("object values of chip is", values)
+  //     //   let keys = Object.keys(chip);
+  //     //   console.log("object keys of chip is", keys)
+  //     //     for (let i = 0; i < values.length; i++) {
+  //     //     lst.push([keys[i].substring(1), values[i]]);
+  //     //     lst_dic.push([keys[i].substring(1), values[i]]);
+
+  //     //     // lst.push([keys[i], values[i]]);
+  //     //   }
+  //     //   results_dic.push(lst_dic)
+  //     //   finalData.push(lst)
+  //     // }
+  //     // console.log("results_dic", results_dic)
+  //     // console.log("finalData is: ", finalData)
+
+  //     this.setState({ categories: results});
+
+  //     // console.log("results are", results_lst)
+  //   });
+  // }
 
   fadeIn = () => {
     // Will change fadeAnim value to 1 in 5 seconds
@@ -140,14 +163,20 @@ export default class CovidData extends Component {
     }).start();
   };
 
+  
   displayExtraData = (index, visible) => {
     const chip = this.state.categories[index];
+    console.log("chip is", chip)
     const values = Object.values(chip);
     const keys = Object.keys(chip);
     const lst = [];
     for (let i = 0; i < values.length; i++) {
+      // lst.push([keys[i].substring(1), values[i]]);
       lst.push([keys[i], values[i]]);
     }
+    // for (let i = 0; i < lst.length; i++ ) {
+
+    // }
     this.setState({
       dataToDisplay: lst,
       key: index,
@@ -167,11 +196,11 @@ export default class CovidData extends Component {
   };
 
   render() {
-    let lst = this.state.categories;
-    lst = lst.slice(0, 3);
+    {console.log("data in", this.state.categories)}
     return (
       <View>
-        <TouchableOpacity
+        
+        {/* <TouchableOpacity
           style={[
             styles.vaccinatedBar,
             {
@@ -183,8 +212,7 @@ export default class CovidData extends Component {
             this.setState({ selectedButton: "button1" });
             this.displayExtraData(3, true);
             this.fadeIn();
-          }}
-        >
+          }}> 
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
@@ -199,12 +227,12 @@ export default class CovidData extends Component {
           <ProgressBar
             style={{ position: "absolute" }}
             progress={
-              this.state.categories[3]["% of Population Vaccinated"] /
+              this.state.categories[3]["2% of Population Vaccinated"] /
               100
             }
             color={Colors.red800}
           />
-        </TouchableOpacity>
+        </TouchableOpacity>  */}
 
         <View style={styles.container}>
           <TouchableOpacity
@@ -223,7 +251,7 @@ export default class CovidData extends Component {
           >
             <Text style={styles.boxName}>Active: </Text>
             <Text style={styles.boxElement}>
-              {this.state.categories[0]["Active Cases"]}
+              {this._isMounted ? this.state.categories[0]["Active Cases"] : 0}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -242,7 +270,7 @@ export default class CovidData extends Component {
           >
             <Text style={styles.boxName}>Imported: </Text>
             <Text style={styles.boxElement}>
-              {this.state.categories[1]["Increase in Imported Cases"]}
+              {this._isMounted ? this.state.categories[1]["Increase in Imported Cases"] : 0}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -261,9 +289,7 @@ export default class CovidData extends Component {
           >
             <Text style={styles.boxName}>Daily Swabs: </Text>
             <Text style={styles.boxElement}>
-              {this.state.categories[2][
-                "Average Daily Swabs Per Week"
-              ].toLocaleString()}
+              {this._isMounted ? this.state.categories[2]["Average Daily Swabs Per Week"].toLocaleString() : 0}
             </Text>
           </TouchableOpacity>
         </View>
@@ -280,10 +306,11 @@ export default class CovidData extends Component {
                     return (
                       <View style={styles.extraInfoContainer} key={index}>
                         <Text style={styles.boxName}>
-                          {this.capitalizeTheFirstLetterOfEachWord(
+                          {/* {this.capitalizeTheFirstLetterOfEachWord(
                             chips[0].replace(/_/g, " ")
                           )}{" "}
-                          :{" "}
+                          :{" "} */}
+                          {chips[0]}{" "}:{" "} 
                         </Text>
                         <Text style={styles.boxElement}>
                           {chips[1].toLocaleString()}

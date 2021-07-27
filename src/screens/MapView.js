@@ -107,6 +107,7 @@ export default class HomePage extends Component {
       scaleAmount: 1,
       provider: null,
       _isMounted: false,
+      categories: [], 
     };
     this.animation = new Animated.Value(0);
     this.getLocationAsync();
@@ -160,6 +161,8 @@ export default class HomePage extends Component {
   setupHighscoreListener() {
     const attractionsData = firebase.database().ref("/attractions");
     const covid_locations = firebase.database().ref("/covid_locations")
+    const covid_data = firebase.database().ref("/covid_data");
+
     attractionsData.once("value").then((snapshot) => {
       // snapshot.val() is the dictionary with all your keys/values from the '/store' path
       let results_lst = []
@@ -177,18 +180,14 @@ export default class HomePage extends Component {
       this.setState({ covidMarker: results_lst});
     });
 
-    // firebase.database().ref(userId).on('value', (snapshot) => {
-    //   const data = snapshot.val();
-    //   this.setState({allTheMarkers : {
-    //     coordinate: data.coordinate,
-    //     count: data.count,
-    //     image_url: data.image_url,
-    //     list_of_dates: data.list_of_dates,
-    //     location: data.location,
-    //     scale: data.scale
-    //   }})
-    //   console.log("New high score: " + data.count);
-    // });
+    covid_data.once("value").then((snapshot) => {
+      // snapshot.val() is the dictionary with all your keys/values from the '/store' path
+      let results = [];
+      for(const [key, index] of Object.entries(snapshot.val())){
+        results.push(index)
+      }
+      this.setState({ categories: results});
+    });
   }
 
 
@@ -210,7 +209,7 @@ export default class HomePage extends Component {
       //   for(const [key,index] of Object.entries(this.state.covidMarkerss)){
       //     console.log(key, index)
       //   }
-
+    console.log("categories are", this.state.categories)
     }
     const interpolations = this.state.eventMarker.map((marker, index) => {
       const inputRange = [index - 1, index, index + 1];
@@ -367,7 +366,7 @@ export default class HomePage extends Component {
               style={{ flex: 1, padding: 0 }}
             />
           </View> */}
-          <CovidData />
+          <CovidData categories={this.state.categories}/>
         </View>
         {/* <CurrentLocationButton
           cb={() => {

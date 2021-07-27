@@ -192,7 +192,7 @@ const BottomSheet = (props) => {
   // };
   return (
     <>
-    {console.log(markerDates)}
+    {/* {console.log(markerDates)} */}
       <PanGestureHandler onGestureEvent={gestureHandler}>
         <Animated.View style={[styleSheetStyles.Animated, style]}>
           {props.showBottomSheet && (
