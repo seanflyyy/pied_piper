@@ -114,7 +114,6 @@ export default class HomePage extends Component {
     this.setProvider();
     this.storeHighScore(1, 1);
     this.setupHighscoreListener();
-    // this.convertDictionary();
     LogBox.ignoreLogs(['Setting a timer'])
   }
 
@@ -169,6 +168,7 @@ export default class HomePage extends Component {
       for(const [key,index] of Object.entries(snapshot.val())){
         results_lst.push(index)
       }
+      console.log("results are", results_lst)
       this.setState({ eventMarker: results_lst });
     });
     covid_locations.once("value").then((snapshot) => {
@@ -176,6 +176,7 @@ export default class HomePage extends Component {
       for(const [key,index] of Object.entries(snapshot.val())){
         results_lst.push(index)
       }
+      console.log("covid markers are", results_lst)
       // snapshot.val() is the dictionary with all your keys/values from the '/store' path
       this.setState({ covidMarker: results_lst});
     });
@@ -192,6 +193,7 @@ export default class HomePage extends Component {
 
 
   centerMap() {
+    console.log('the region that center map would center to is', this.state.region)
     const { latitude, longitude, latitudeDelta, longitudeDelta } =
       this.state.region;
     this.map.animateToRegion({
@@ -220,142 +222,142 @@ export default class HomePage extends Component {
       });
       return scale;
     });
-    return (
-      <View style={styles.container}>
-        <StatusBar hidden />
-        {/* <BottomSheetScreen style={{position: 'absolute'}}/> */}
-        <MapView
-          showsCompass={false}
-          rotateEnable={false}
-          showsUserLocation={true}
-          showsPointsOfInterest={false}
-          initialRegion={this.state.region}
-          provider={this.state.provider}
-          ref={(map) => (this.map = map)}
-          style={styles.container}
-          customMapStyle={[
-            {
-              featureType: "administrative",
-              elementType: "geometry",
-              stylers: [
-                {
-                  visibility: "off",
-                },
-              ],
-            },
-            {
-              featureType: "poi",
-              stylers: [
-                {
-                  visibility: "off",
-                },
-              ],
-            },
-            {
-              featureType: "road",
-              elementType: "labels.icon",
-              stylers: [
-                {
-                  visibility: "off",
-                },
-              ],
-            },
-            {
-              featureType: "transit",
-              stylers: [
-                {
-                  visibility: "off",
-                },
-              ],
-            },
-          ]}
-        >
-          
-          {this.state.eventMarker.map((marker, index) => {
-            // const scaleStyle = {
-            //   transform: [{ scale: interpolations[index].scale }],
-            // };
-            // console.log("marker is", Object.keys(marker))
-            // const key = Object.keys(marker)
-            // const marker_key = String(key[index])
-            // console.log(Object(this.state.eventMarker).items())
-            // console.log(marker_key)
-            // console.log(String(key[index]))
-            // console.log(key[index])
-            // console.log("coordinate is", marker[marker_key])
+      return (
+        <View style={styles.container}>
+          <StatusBar hidden />
+          {/* <BottomSheetScreen style={{position: 'absolute'}}/> */}
+          <MapView
+            showsCompass={false}
+            rotateEnable={false}
+            showsUserLocation={true}
+            showsPointsOfInterest={false}
+            initialRegion={this.state.region}
+            provider={this.state.provider}
+            ref={(map) => (this.map = map)}
+            style={styles.container}
+            customMapStyle={[
+              {
+                featureType: "administrative",
+                elementType: "geometry",
+                stylers: [
+                  {
+                    visibility: "off",
+                  },
+                ],
+              },
+              {
+                featureType: "poi",
+                stylers: [
+                  {
+                    visibility: "off",
+                  },
+                ],
+              },
+              {
+                featureType: "road",
+                elementType: "labels.icon",
+                stylers: [
+                  {
+                    visibility: "off",
+                  },
+                ],
+              },
+              {
+                featureType: "transit",
+                stylers: [
+                  {
+                    visibility: "off",
+                  },
+                ],
+              },
+            ]}
+          >
+            
+            {this.state.eventMarker.map((marker, index) => {
+              // const scaleStyle = {
+              //   transform: [{ scale: interpolations[index].scale }],
+              // };
+              // console.log("marker is", Object.keys(marker))
+              // const key = Object.keys(marker)
+              // const marker_key = String(key[index])
+              // console.log(Object(this.state.eventMarker).items())
+              // console.log(marker_key)
+              // console.log(String(key[index]))
+              // console.log(key[index])
+              // console.log("coordinate is", marker[marker_key])
 
-            // console.log("coordinate is", marker[marker_key].coordinate)
-            // console.log("longitude is", marker[String(key[index])].coordinate.latitude)
+              // console.log("coordinate is", marker[marker_key].coordinate)
+              // console.log("longitude is", marker[String(key[index])].coordinate.latitude)
 
-            return (
-              <MapView.Marker
-                key={index}
-                coordinate={marker.coordinate}
-                onPress={() => {
-                  this.map.animateToRegion({
-                    latitude: marker.coordinate.latitude,
-                    longitude: marker.coordinate.longitude,
-                    latitudeDelta: 0.03864195044303443,
-                    longitudeDelta: 0.030142817690068,
-                  });
-                  this.setState({
-                    selectedMarker: marker,
-                    showEventSheet: true,
-                    showCovidSheet: false,
-                  });
-                  // this.setState({marker:{scale: 2}})
-                }}
-              >
-                <View
-                  style={[
-                    styles.ring,
-                    { backgroundColor: colorOfEvent[marker.type] },
-                  ]}
+              return (
+                <MapView.Marker
+                  key={index}
+                  coordinate={marker.coordinate}
+                  onPress={() => {
+                    this.map.animateToRegion({
+                      latitude: marker.coordinate.latitude,
+                      longitude: marker.coordinate.longitude,
+                      latitudeDelta: 0.03864195044303443,
+                      longitudeDelta: 0.030142817690068,
+                    });
+                    this.setState({
+                      selectedMarker: marker,
+                      showEventSheet: true,
+                      showCovidSheet: false,
+                    });
+                    // this.setState({marker:{scale: 2}})
+                  }}
                 >
-                  {typesOfEvents[marker.type]}
-                  {/* <Text style={{fontSize: 8, fontWeight: 'bold', color: colorOfEvent[marker.type]}}>{marker.location}</Text> */}
-                </View>
-              </MapView.Marker>
-            );
-          })}
-          
-          {this.state.covidMarker.map((marker, index) => {
-            const key = Object.keys(marker)
-            // console.log(marker.length)
-            return (
-              <MapView.Marker
-                key={index}
-                coordinate={marker.coordinates}
-                onPress={() => {
-                  this.map.animateToRegion({
-                    latitude: marker.coordinates.latitude,
-                    longitude: marker.coordinates.longitude,
-                    latitudeDelta: 0.03864195044303443,
-                    longitudeDelta: 0.030142817690068,
-                  });
-                  this.setState({
-                    selectedMarker: marker,
-                    showCovidSheet: true,
-                    showEventSheet: false,
-                  });
-                  // this.setState({marker:{scale: 2}})
-                }}
-              >
-                <View
-                  style={[
-                    styles.ring,
-                    {
-                      backgroundColor: "red",
-                      // transform: [{ scale: marker.scale}]
-                    },
-                  ]}
+                  <View
+                    style={[
+                      styles.ring,
+                      { backgroundColor: colorOfEvent[marker.type] },
+                    ]}
+                  >
+                    {typesOfEvents[marker.type]}
+                    {/* <Text style={{fontSize: 8, fontWeight: 'bold', color: colorOfEvent[marker.type]}}>{marker.location}</Text> */}
+                  </View>
+                </MapView.Marker>
+              );
+            })}
+            
+            {this.state.covidMarker.map((marker, index) => {
+              const key = Object.keys(marker)
+              // console.log(marker.length)
+              return (
+                <MapView.Marker
+                  key={index}
+                  coordinate={marker.coordinates}
+                  onPress={() => {
+                    this.map.animateToRegion({
+                      latitude: marker.coordinates.latitude,
+                      longitude: marker.coordinates.longitude,
+                      latitudeDelta: 0.03864195044303443,
+                      longitudeDelta: 0.030142817690068,
+                    });
+                    this.setState({
+                      selectedMarker: marker,
+                      showCovidSheet: true,
+                      showEventSheet: false,
+                    });
+                    // this.setState({marker:{scale: 2}})
+                  }}
                 >
-                  <MaterialIcons name="coronavirus" size={14} color="white" />
-                </View>
-              </MapView.Marker>
-            );
-          })}
-        </MapView>
+                  <View
+                    style={[
+                      styles.ring,
+                      {
+                        backgroundColor: "red",
+                        // transform: [{ scale: marker.scale}]
+                      },
+                    ]}
+                  >
+                    <MaterialIcons name="coronavirus" size={14} color="white" />
+                  </View>
+                </MapView.Marker>
+              );
+            })}
+          </MapView>
 
         <View style={styles.container_top}>
           {/* <View style={styles.searchBox}>
@@ -368,29 +370,11 @@ export default class HomePage extends Component {
           </View> */}
           <CovidData categories={this.state.categories}/>
         </View>
-        {/* <CurrentLocationButton
-          cb={() => {
-            this.centerMap(), this.setState({ showEventSheet: false, showCovidSheet: false });
-          }}
-        /> */}
-        <TouchableOpacity
-          style={styles.locationButton}
-          onPress={() => {
-            this.centerMap();
-            this.setState({ showEventSheet: false, showCovidSheet: false });
-          }}
-        >
-          <MaterialIcons name="my-location" color="#000000" size={25} />
-        </TouchableOpacity>
-        <BottomSheet
-          markerInfo={this.state.selectedMarker}
-          showBottomSheet={this.state.showEventSheet}
-          showCovidSheet={this.state.showCovidSheet}
-        />
       </View>
-    );
-  }
-}
+      );
+        }
+      }
+    
 
 const styles = StyleSheet.create({
   container: {

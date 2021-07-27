@@ -87,11 +87,20 @@ export default class CovidData extends Component {
     };
     // this.updateData();
     this.fadeAnim = new Animated.Value(0);
-    {console.log("imported props data is", this.state.categories)}
+    this.retrieveData();
   }
 
-  componentDidMount() {
-    this._isMounted = true
+  retrieveData = () => {
+    let attractionsData = firebase.database().ref("/covid_data");
+    attractionsData.once("value").then((snapshot) => {
+      // snapshot.val() is the dictionary with all your keys/values from the '/store' path
+      let results_lst = []
+      for(const [key,index] of Object.entries(snapshot.val())){
+        results_lst.push(index)
+      }
+      console.log(results_lst)
+      this.setState({ section: results_lst, _isRetrieved : true});
+    });
   }
   // updateData() {
   //   const attractionsData = firebase.database().ref("/covid_data");
@@ -237,16 +246,16 @@ export default class CovidData extends Component {
         <View style={styles.container}>
           <TouchableOpacity
             style={[
-              styles.chipsItem,
+              styles.vaccinatedBar,
               {
                 borderColor:
-                  this.state.selectedButton === "button2" ? "#26b99d" : "white",
+                  this.state.selectedButton === "button1" ? "#26b99d" : "white",
               },
             ]}
             onPress={() => {
-              this.displayExtraData(0, true);
+              this.setState({ selectedButton: "button1" });
+              this.displayExtraData(3, true);
               this.fadeIn();
-              this.setState({ selectedButton: "button2" });
             }}
           >
             <Text style={styles.boxName}>Active: </Text>
@@ -326,13 +335,38 @@ export default class CovidData extends Component {
                     this.setState({ selectedButton: "" });
                   }}
                 >
-                  <EvilIcons name="close" size={24} color="black" />
+                  <View style={{ flexDirection: "column" }}>
+                    {this.state.dataToDisplay.map((chips, index) => {
+                      return (
+                        <View style={styles.extraInfoContainer} key={index}>
+                          <Text style={styles.boxName}>
+                            {this.capitalizeTheFirstLetterOfEachWord(
+                              chips[0].replace(/_/g, " ")
+                            )}{" "}
+                            :{" "}
+                          </Text>
+                          <Text style={styles.boxElement}>
+                            {chips[1].toLocaleString()}
+                          </Text>
+                        </View>
+                      );
+                    })}
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.displayExtraData(this.state.key, false);
+                      this.fadeOut();
+                      this.setState({ selectedButton: "" });
+                    }}
+                  >
+                    <EvilIcons name="close" size={24} color="black" />
+                  </TouchableOpacity>
                 </TouchableOpacity>
               </View>
             </View>
-          </Animated.View>}
-      </View>
-    );
+        </Animated.View>}
+      </View> 
+      );
   }
 }
 
