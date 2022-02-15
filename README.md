@@ -1,4 +1,6 @@
-# Pied Piper 
+# Pied Piper (Covid-Event Map Application)
+
+[![Pied Piper Video]({image-url})]({https://www.youtube.com/watch?v=Tpcvu5XhIbc&ab_channel=JustBryanThings} "Link Title")
 
 ## Description 
 Developed from 14 to 16 June 2021 for Brainhack 2021 CODE_EXP, a competition by DSTA , Pied Piper is an event booking application built with React Native and Firebase. Through the map interface, we are able to display Covid-19 information for users to visualise locations affected by Covid-19 in Singapore and to collate the events in Singapore under one umbrella for easy viewing.
