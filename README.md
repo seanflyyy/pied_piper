@@ -18,4 +18,4 @@ Then run
 or 
 ``` npm install ``` 
 
-After all the dependencies are done installing, you are ready to use the application! 
+After all the dependencies are done installing, you are ready to use the application by running ```yarn start```
