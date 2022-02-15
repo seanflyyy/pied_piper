@@ -11,7 +11,7 @@ Developed from 14 to 16 June 2021 for Brainhack 2021 CODE_EXP, a competition by 
 - react-native-reanimated
 
 ## Set Up 
-``` git clone https://github.com/seanflyyy/covid_map.git ``` 
+``` git clone https://github.com/seanflyyy/covid-map.git ``` 
 
 Then run
 ``` yarn install ``` 
